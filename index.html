@@ -1,79 +1,68 @@
 <html>
-  <style>
+<style>
     .google {
-      max-height: 100%;
-      max-width: 100%;
-      object-fit: contain;
-      object-position: center bottom;
-      width: auto;
+        max-height: 100%;
+        max-width: 100%;
+        object-fit: contain;
+        object-position: center bottom;
+        width: auto;
     }
-    .center {
-      height: 100%;
-      margin-top: auto;
-      flex-shrink: 0;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .top {
-      height: 60px;
-    }
-    .right {
-      display: flex;
-      align-items: center;
-      padding: 6px;
-    }
-    .icons {
-      height: 48px;
-      vertical-align: middle;
-      white-space: nowrap;
-      -ms-flex-align: center;
-      -moz-box-align: center;
-      -webkit-box-align: center;
-      -webkit-align-items: center;
-      
-    line-height: normal;
-    padding-right: 15px;
-    }
-    .gb_B{
-        color: white;
-        align-items: center;
-      display: flex;
-      font-family: arial,sans-serif;
-    }
-  </style>
-  <head>
-    <title>Google</title>
-    <link
-      class="icon"
-      rel="shortcut icon"
-      href="https://img2.freepng.ru/20180723/btg/kisspng-google-logo-google-search-google-images-g-suite-google-adwords-5b5695e47fdc94.0743248315324011245237.jpg"
-      type="image/x-icon"
-    />
-  </head>
 
-  <body
-    style="background-color: #202124; flex-shrink: 0; box-sizing: border-box"
-  >
-    <table>
-        <tr>
-            <td>
-                <a class="gb_B" href="https://mail.google.com/mail">Почта</a>
-            </td>
-            <td>
-                <a class="gb_B" href="https://www.google.com/imghp?hl=ru" >Картинки</a>
-            </td>
-        </tr>
-    </table>
-    <div class="center">
-      <img
-        class="google"
-        src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_light_color_272x92dp.png"
-        alt="гугл"
-        width="272"
-        height="92"
-      />
+    .center {
+        height: 100%;
+        margin-top: auto;
+        flex-shrink: 0;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .top {
+        height: 48px;
+        padding: 6px;
+        display: flex;
+        align-items: center;
+    }
+
+    .top-text {
+        color: white;
+        font-size: 13px;
+        font-family: arial, sans-serif;
+        text-decoration: none;
+        padding-left: 15px
+    }
+
+    .top-right {
+        padding-left: 32px;
+        float: right;
+    }
+
+    .divright-text {
+        padding-right: 15px;
+    }
+</style>
+
+<head>
+    <title>Google</title>
+    <link class="icon" rel="shortcut icon"
+        href="https://img2.freepng.ru/20180723/btg/kisspng-google-logo-google-search-google-images-g-suite-google-adwords-5b5695e47fdc94.0743248315324011245237.jpg"
+        type="image/x-icon" />
+</head>
+
+<body style="background-color: #202124; flex-shrink: 0; box-sizing: border-box">
+    <div class="top">
+        <div class="top-right">
+            <div class="divright-text"><a class="top-text" href="https://mail.google.com/mail/&ogbl">Почта</a>
+                <a class="top-text" href="https://www.google.com/imghp?hl=ru&ogbl">Картинки</a>
+            </div>
+        </div>
     </div>
-  </body>
+    <div class="center" style="height: 290px;">
+        <img class="google"
+            src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_light_color_272x92dp.png" alt="гугл"
+            width="272" height="92" />
+    </div>
+</body>
+
 </html>

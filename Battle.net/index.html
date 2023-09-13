@@ -158,6 +158,55 @@
     align-items: center;
     margin: 0 40px;
   }
+
+  body .btn .icon-google {
+    background: url(https://bnetaccount.akamaized.net/login/static/images/login/social/google-logo-color.svg) no-repeat 0 0;
+    opacity: 1;
+    height: 18px;
+    width: 17px;
+    margin-top: 0;
+    margin-bottom: 15px;
+  }
+
+  [class^="icon-"],
+  [class*=" icon-"] {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    overflow: hidden;
+    line-height: 16px;
+    vertical-align: top;
+    background-repeat: no-repeat;
+    text-indent: -9999px;
+    transition: opacity 0.2s;
+  }
+
+  body.tk-bnet-next .btn.social-icon {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    padding: 13px;
+    border-radius: 4px;
+    margin: 12px;
+  }
+
+  body .btn.social-icon.login-google {
+    background-color: #FFF;
+  }
+
+  input,
+  label.checkbox,
+  button.btn,
+  a.btn {
+    margin-bottom: 15px;
+  }
+  body.tk-bnet-next .btn.social-icon > i {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+}
 </style>
 
 <body>
@@ -171,22 +220,11 @@
           <div class="login">
             <h3 class="login-header">Авторизоваться</h3>
             <div class="useResponse social-login external-login-container">
-              <form method="post" action="https://eu.account.battle.net/login/signin/google" id="googleLogin"
-                class="class org.apache.maven.project.MavenProject" enctype="">
-                <button id="google" role="row" class="btn btn-block third-party-login social-icon login-google"
-                  rel="external" aria-label="Авторизоваться с помощью Facebook"
-                  title="Авторизоваться с помощью Facebook" tabindex="0">
-                  <i class="icon-google"></i>
-                </button>
-                <input type="hidden" name="scope" value="openid,profile,email">
-                <input type="hidden" name="ref" value="https://eu.shop.battle.net/ru-ru/404">
-                <input type="hidden" name="app" value="shop">
-                <input type="hidden" name="scheme" value="">
-                <input type="hidden" name="deviceProof"
-                  value="880921f8605ee72ec0fc9dcade0157d2538d5a746fe115a48d124fc5568192df">
-                <input type="hidden" id="csrftoken-googleLogin" class="csrftoken" name="csrftoken"
-                  value="a7fb860e-fe27-48cd-b28f-f41eaf9074f6">
-              </form>
+              <button id="google" role="row" class="btn btn-block third-party-login social-icon login-google">
+                <i class="icon-google"></i>
+              </button>
+
+
               <form method="post" action="/login/signin/facebook" id="facebookLogin"
                 class="class org.apache.maven.project.MavenProject" enctype="">
                 <button id="facebook" role="row" class="btn btn-block third-party-login social-icon login-facebook"

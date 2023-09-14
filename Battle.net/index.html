@@ -28,7 +28,8 @@
     min-height: 100%;
     position: relative;
     width: 416px;
-    margin: 0 auto 25px;
+    margin: 24px auto 85px;
+
   }
 
   .full-window {
@@ -40,81 +41,22 @@
     padding-right: 40px;
   }
 
-  .main-box-inner {
+  .main-box>.main-box-inner {
     position: relative;
     width: 100%;
     padding: 24px 0;
     background: none;
     border: none;
-    box-sizing: border-box;
-  }
-
-
-
-  .logo {
-    background-image: url(https://bnetaccount.akamaized.net/login/static/images/toolkit/defaults/logos/bnet/logo-vertical-color-light.1UZ9S.svg);
-    text-indent: -9999px;
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    width: 240px;
-    height: 72px;
   }
 
   .logo.logo-horizontal {
     background-image: url(https://bnetaccount.akamaized.net/login/static/images/toolkit/defaults/logos/bnet/logo-horizontal-color-light.1z1fI.svg);
-    width: 240px;
-    height: 72px;
-    margin-left: 88px;
-    margin-right: 88px;
-    margin-bottom: 38px;
-    margin-top: 0;
-  }
-
-  body .logo {
-    margin-top: 55px;
-    margin-bottom: 40px;
-    display: block;
-  }
-
-  body.tk-bnet-next .logo {
     margin: 0 auto 38px auto;
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
     width: 240px;
     height: 72px;
-  }
-
-  body.tk-bnet-next h1 {
-    font-size: 32px;
-    margin-bottom: 16px;
-  }
-
-  h1,
-  .heading-1 {
-    font-weight: 700;
-    font-size: 32px;
-    line-height: 36px;
-    color: #ffffff;
-  }
-
-  body .logo {
-    margin-top: 55px;
-    margin-bottom: 40px;
-    display: block;
-  }
-
-  h1 {
-    display: block;
-    font-size: 2em;
-    margin-block-start: 0.67em;
-    margin-block-end: 0.67em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    font-weight: bold;
-    font-size: 35px;
-    margin-bottom: 30px;
   }
 
   h1,
@@ -134,21 +76,17 @@
     margin: 0 0 39.6px 0;
   }
 
-  body #login-header {
+
+  h3 {
     font-weight: 700;
     font-size: 32px;
     line-height: 36px;
     margin: 40px 0px;
-  }
-
-  h3 {
-    display: block;
-    font-size: 1.17em;
+    color: #ffffff;
     margin-block-start: 1em;
     margin-block-end: 1em;
     margin-inline-start: 0px;
     margin-inline-end: 0px;
-    font-weight: bold;
   }
 
   body .external-login-container {
@@ -156,16 +94,50 @@
     flex-flow: row wrap;
     justify-content: center;
     align-items: center;
-    margin: 0 40px;
+    width: 290px;
+    margin: 0 auto;
   }
 
   body .btn .icon-google {
     background: url(https://bnetaccount.akamaized.net/login/static/images/login/social/google-logo-color.svg) no-repeat 0 0;
     opacity: 1;
     height: 18px;
-    width: 17px;
-    margin-top: 0;
-    margin-bottom: 15px;
+    width: 18px;
+  }
+
+  body .btn .icon-facebook {
+    background: url(https://bnetaccount.akamaized.net/login/static/images/login/social/facebook-logo-white.svg) no-repeat 0 0;
+    opacity: 1;
+    height: 18px;
+    width: 18px;
+  }
+
+  body .btn .icon-apple {
+    background: url(https://bnetaccount.akamaized.net/login/static/images/login/social/apple-logo-black.svg) no-repeat 0 0;
+    opacity: 1;
+    height: 19px;
+    width: 15px;
+  }
+
+  body .btn .icon-google {
+    background: url(https://bnetaccount.akamaized.net/login/static/images/login/social/google-logo-color.svg) no-repeat 0 0;
+    opacity: 1;
+    height: 18px;
+    width: 18px;
+  }
+
+  body .btn .icon-google {
+    background: url(https://bnetaccount.akamaized.net/login/static/images/login/social/google-logo-color.svg) no-repeat 0 0;
+    opacity: 1;
+    height: 18px;
+    width: 18px;
+  }
+
+  body .btn .icon-google {
+    background: url(https://bnetaccount.akamaized.net/login/static/images/login/social/google-logo-color.svg) no-repeat 0 0;
+    opacity: 1;
+    height: 18px;
+    width: 18px;
   }
 
   [class^="icon-"],
@@ -187,10 +159,18 @@
     height: 48px;
     padding: 13px;
     border-radius: 4px;
-    margin: 12px;
+    margin-bottom: 12px;
   }
 
   body .btn.social-icon.login-google {
+    background-color: #FFF;
+  }
+
+  body .btn.social-icon.login-facebook {
+    background-color: #1877F2;
+  }
+
+  body .btn.social-icon.login-apple {
     background-color: #FFF;
   }
 
@@ -200,22 +180,50 @@
   a.btn {
     margin-bottom: 15px;
   }
-  body.tk-bnet-next .btn.social-icon > i {
+
+  body .btn.social-icon {
+    width: 48px;
+    height: 48px;
+    padding: 13px;
+    border: none;
+    border-radius: 4px;
+    margin-bottom: 12px;
+  }
+
+  .btn {
+    white-space: normal;
+    margin: 12px;
+    font-size: 16px;
+    line-height: 20px;
+    min-height: 40px;
+    background-color: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+    border: 2px solid transparent;
+    font-weight: 500;
+    border-radius: 4px;
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  body.tk-bnet-next .btn.social-icon>i {
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
     margin: 0;
-}
+  }
 </style>
 
 <body>
   <div>
     <div class="main-box">
       <div class="main-box-inner">
-        <h1 class="logo logo-horizontal logo-small" style="font-size: 35px; margin-bottom: 30px">
-          Авторизация в Battle.net
-        </h1>
+        <h1 class="logo logo-horizontal logo-small"></h1>
         <div class="input">
           <div class="login">
             <h3 class="login-header">Авторизоваться</h3>
@@ -223,8 +231,6 @@
               <button id="google" role="row" class="btn btn-block third-party-login social-icon login-google">
                 <i class="icon-google"></i>
               </button>
-
-
               <form method="post" action="/login/signin/facebook" id="facebookLogin"
                 class="class org.apache.maven.project.MavenProject" enctype="">
                 <button id="facebook" role="row" class="btn btn-block third-party-login social-icon login-facebook"

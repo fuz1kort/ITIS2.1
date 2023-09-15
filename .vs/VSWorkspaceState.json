@@ -1,6 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\MyHttpServer"
   ],
+  "SelectedNode": "\\MyHttpServer\\MyHttpServer.csproj",
   "PreviewInSolutionExplorer": false
 }

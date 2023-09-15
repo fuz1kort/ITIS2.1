@@ -1,0 +1,14 @@
+C:\Users\Marat\source\repos\fuz1kort\ITIS2.1\MyHttpServer\bin\Debug\net7.0\MyHttpServer.exe
+C:\Users\Marat\Source\Repos\fuz1kort\ITIS2.1\MyHttpServer\bin\Debug\net7.0\MyHttpServer.deps.json
+C:\Users\Marat\Source\Repos\fuz1kort\ITIS2.1\MyHttpServer\bin\Debug\net7.0\MyHttpServer.runtimeconfig.json
+C:\Users\Marat\source\repos\fuz1kort\ITIS2.1\MyHttpServer\bin\Debug\net7.0\MyHttpServer.dll
+C:\Users\Marat\source\repos\fuz1kort\ITIS2.1\MyHttpServer\bin\Debug\net7.0\MyHttpServer.pdb
+C:\Users\Marat\source\repos\fuz1kort\ITIS2.1\MyHttpServer\obj\Debug\net7.0\MyHttpServer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Marat\source\repos\fuz1kort\ITIS2.1\MyHttpServer\obj\Debug\net7.0\MyHttpServer.AssemblyInfoInputs.cache
+C:\Users\Marat\source\repos\fuz1kort\ITIS2.1\MyHttpServer\obj\Debug\net7.0\MyHttpServer.AssemblyInfo.cs
+C:\Users\Marat\source\repos\fuz1kort\ITIS2.1\MyHttpServer\obj\Debug\net7.0\MyHttpServer.csproj.CoreCompileInputs.cache
+C:\Users\Marat\source\repos\fuz1kort\ITIS2.1\MyHttpServer\obj\Debug\net7.0\MyHttpServer.dll
+C:\Users\Marat\source\repos\fuz1kort\ITIS2.1\MyHttpServer\obj\Debug\net7.0\refint\MyHttpServer.dll
+C:\Users\Marat\source\repos\fuz1kort\ITIS2.1\MyHttpServer\obj\Debug\net7.0\MyHttpServer.pdb
+C:\Users\Marat\Source\Repos\fuz1kort\ITIS2.1\MyHttpServer\obj\Debug\net7.0\MyHttpServer.genruntimeconfig.cache
+C:\Users\Marat\Source\Repos\fuz1kort\ITIS2.1\MyHttpServer\obj\Debug\net7.0\ref\MyHttpServer.dll

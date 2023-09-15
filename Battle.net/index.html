@@ -8,6 +8,10 @@
   <title>Авторизация в Battle.net</title>
 </head>
 <style>
+  * {
+    margin: 0;
+  }
+
   body {
     font-family: "Object Sans", "Arial", "Helvetica", "Segoe UI Symbol",
       "Segoe MDL2 Assets", sans-serif;
@@ -248,7 +252,8 @@
     text-align: center;
     overflow: hidden;
     white-space: nowrap;
-    margin: 14px 0 20px 0;
+    margin: 40px 0 20px 0;
+    line-height: 21px;
   }
 
   body .thirdparty-line span {
@@ -276,6 +281,168 @@
   body .thirdparty-line span:after {
     left: 100%;
     margin-left: 20px;
+  }
+
+  label.control-label {
+    display: none;
+  }
+
+  .control-label {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0.075em;
+    display: block;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  label {
+    display: block;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    margin: 0;
+  }
+
+  label,
+  input,
+  button,
+  select,
+  textarea {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+  }
+
+  body.tk-bnet-next .box-wrapper .login>form .control-group {
+    margin: 0 auto 11px;
+  }
+
+  .uneditable-input,
+  select,
+  textarea,
+  input[type="color"],
+  input[type="date"],
+  input[type="datetime"],
+  input[type="datetime-local"],
+  input[type="email"],
+  input[type="month"],
+  input[type="number"],
+  input[type="password"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="text"],
+  input[type="time"],
+  input[type="url"],
+  input[type="week"],
+  .select-box {
+    display: inline-block;
+    vertical-align: middle;
+    height: 40px;
+    padding: 0 12px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    font-size: 16px;
+    line-height: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.36);
+    background-color: #171920;
+    color: #ffffff;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border-radius: 4px;
+  }
+
+  .uneditable-input.input-block,
+  select.input-block,
+  textarea.input-block,
+  input[type="color"].input-block,
+  input[type="date"].input-block,
+  input[type="datetime"].input-block,
+  input[type="datetime-local"].input-block,
+  input[type="email"].input-block,
+  input[type="month"].input-block,
+  input[type="number"].input-block,
+  input[type="password"].input-block,
+  input[type="search"].input-block,
+  input[type="tel"].input-block,
+  input[type="text"].input-block,
+  input[type="time"].input-block,
+  input[type="url"].input-block,
+  input[type="week"].input-block,
+  .select-box.input-block {
+    width: 100%;
+  }
+
+  .control-group {
+    margin-bottom: 11px;
+  }
+
+  body #login-wrapper button#submit {
+    margin-top: 5px;
+    margin-bottom: 6px;
+  }
+
+  .btn-primary {
+    background-color: #0074e0;
+    color: #ffffff;
+    border: 2px solid transparent;
+    font-weight: 500;
+    border-radius: 4px;
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+    text-align: center;
+    margin-left: auto;
+    margin-top: 35px;
+  }
+
+  .btn-block {
+    display: block;
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  p,
+  li,
+  ol,
+  a.btn,
+  a:not(.btn),
+  .primary-text,
+  .verification-text,
+  .error-helper,
+  .js-enabled .select-box .options,
+  .js-enabled .select-box>.current {
+    font-family: "Noto Sans", "Georgia", "Times New Roman", "Times", "Segoe UI Symbol", "Segoe MDL2 Assets", sans-serif;
+  }
+
+  a:not(.btn) {
+    color: #148eff;
+    text-decoration: none;
+    text-underline-position: under;
+    font-family: "Noto Sans", "Georgia", "Times New Roman", "Times", "Segoe UI Symbol", "Segoe MDL2 Assets", serif;
+    font-weight: 700;
+  }
+
+  li {
+    line-height: 24px;
+    margin: 40px 0 24.75px 0;
+    padding-left: 10px;
+    font-size: 16px;
+  }
+
+  #help-links {
+    list-style-type: none;
+    text-align: center;
+    margin: 10px 0;
+  }
+
+  ul,
+  ol {
+    padding: 0;
+    margin: 0 0 39.6px 30px;
+    line-height: 30px;
+    font-family: "Noto Sans", "Georgia", "Times New Roman", "Times", "Segoe UI Symbol", "Segoe MDL2 Assets", serif;
   }
 </style>
 
@@ -399,8 +566,7 @@
             form-with-captcha">
               <div id="login-input-container" class="">
                 <div class="control-group ">
-                  <label id="accountName-label" class="control-label" for="accountName">Электронная почта или
-                    телефон</label>
+                  <label id="accountName-label" class="control-label" for="accountName"></label>
                   <div class="controls">
                     <input id="accountName"
                       aria-label="Поле электронной почты или телефона. Введите электронный адрес или телефонный номер."
@@ -413,7 +579,7 @@
                   </div>
                 </div>
                 <div class="control-group ">
-                  <label id="password-label" class="control-label" for="password">Пароль</label>
+                  <label id="password-label" class="control-label" for="password"></label>
                   <div class="controls">
                     <div class="blz-password-wrapper"><input id="password" aria-label="Поле пароля. Введите пароль."
                         name="password" title="Пароль" maxlength="128" type="password" tabindex="0" class="input-block "
@@ -449,10 +615,68 @@
               <input type="hidden" name="deviceProof"
                 value="880921f8605ee72ec0fc9dcade0157d2538d5a746fe115a48d124fc5568192df">
             </form>
+            <ul id="help-links" role="navigation">
+              <li role="link">
+                <a rel="internal"
+                  href="https://account.battle.net/creation/?ref=https%3A%2F%2Feu.shop.battle.net%2Fru-ru%2F404&amp;theme=bnet-next&amp;app=shop&amp;hostingApp=shop&amp;flowTrackingId=8f2b8351-4044-4eef-917d-7aaa14746fa9&amp;bdp=880921f8605ee72ec0fc9dcade0157d2538d5a746fe115a48d124fc5568192df"
+                  tabindex="0" id="signup" role="button">
+                  Зарегистрируйте учетную запись Battle.net бесплатно
+                </a>
+              </li>
+              <li role="link">
+                <a rel="internal" target="_blank"
+                  href="https://account.battle.net/recovery/?ref=&amp;theme=bnet-next&amp;app=shop&amp;hostingApp=shop&amp;flowTrackingId=8f2b8351-4044-4eef-917d-7aaa14746fa9"
+                  tabindex="0" id="loginSupport" role="button">
+                  Вы не можете войти?
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
     </div>
+    <footer id="footer" class="footer ru-ru">
+      <div id="nav-client-footer" class="nav-client">
+        <div class="mobileFooterEnabled footer-content footer-desktop grid-container">
+          <div class="nav-section support-feedback">
+            <div class="nav-left">
+              <div id="nav-feedback">
+              </div>
+            </div>
+          </div>
+          <div class="nav-section">
+            <div class="nav-left nav-logo-group">
+              <div class="footer-links nav-left">
+                <a class="nav-item nav-a" href="https://www.blizzard.com/company/legal/eula" data-analytics="global-nav"
+                  data-analytics-placement="Footer - eula">Пользовательское соглашение Blizzard</a>
+                <span>|</span>
+                <a class="nav-item nav-a" href="https://www.blizzard.com/company/about/privacy.html"
+                  data-analytics="global-nav" data-analytics-placement="Footer - Privacy">Политика
+                  конфиденциальности</a>
+                <span>|</span>
+                <a class="nav-item nav-a" href="https://www.blizzard.com/company/legal/" data-analytics="global-nav"
+                  data-analytics-placement="Footer - Terms">Условия</a>
+                <span>|</span>
+                <a class="nav-item nav-a" href="https://eu.blizzard.com/company/about/infringementnotice.html"
+                  data-analytics="global-nav" data-analytics-placement="Footer - copyright">Авторское право</a>
+                <span>|</span>
+                <a class="nav-item nav-a" href="/login/cookies" data-analytics="global-nav"
+                  data-analytics-placement="Footer - Cookies">Файлы cookie</a>
+                <span>|</span>
+                <a class="nav-item nav-a" href="/login/cookies#settings" data-analytics="global-nav"
+                  data-analytics-placement="Footer - Cookie Settings">Параметры cookie</a>
+                <div class="copyright">© Blizzard Entertainment, Inc., 2023</div>
+                <div class="nav-footer-icon-container">
+                  <ul class="nav-footer-icon-list">
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </footer>
   </div>
 </body>
 

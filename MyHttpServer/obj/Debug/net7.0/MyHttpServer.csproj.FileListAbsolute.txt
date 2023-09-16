@@ -26,3 +26,4 @@ C:\Users\gafar\Source\Repos\fuz1kort\ITIS2.1\MyHttpServer\obj\Debug\net7.0\refin
 C:\Users\gafar\Source\Repos\fuz1kort\ITIS2.1\MyHttpServer\obj\Debug\net7.0\MyHttpServer.pdb
 C:\Users\gafar\Source\Repos\fuz1kort\ITIS2.1\MyHttpServer\obj\Debug\net7.0\MyHttpServer.genruntimeconfig.cache
 C:\Users\gafar\Source\Repos\fuz1kort\ITIS2.1\MyHttpServer\obj\Debug\net7.0\ref\MyHttpServer.dll
+C:\Users\gafar\Source\Repos\fuz1kort\ITIS2.1\MyHttpServer\bin\Debug\net7.0\appsetting.json

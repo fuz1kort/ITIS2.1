@@ -1,32 +1,57 @@
-﻿using System;
-using System.IO;
+﻿using MyHttpServer.Configuration;
 using System.Net;
-using System.Threading;
+using System.Text.Json;
 
+const string pathConfigFile = @".\appsetting1.json";
+HttpListener listener = new();
 
-string address = "127.0.0.1";
-int port = 1414;
-
-
-var listener = new HttpListener();
-listener.Prefixes.Add("http://" + address + ":" + port + "/");
-listener.Start();
-Console.WriteLine("Server started. Listening on " + address + ":" + port);
-
-Thread serverThread = new Thread(ServerThread);
-serverThread.Start();
-
-
-Console.WriteLine("Press 'stop' to stop the server.");
-while (true)
+try
 {
-    if (Console.ReadLine() == "stop")
-    {
-        listener.Stop();
-        Console.WriteLine("Server stopped.");
-        break;
+    if (!File.Exists(pathConfigFile))
+    { 
+        Console.WriteLine("Файл appsetting.json не был найден");
+        throw new Exception();
+        return;
     }
+
+    AppSettings config;
+
+    using (var file = File.OpenRead(pathConfigFile))
+    {
+        config = JsonSerializer.Deserialize<AppSettings>(file);
+
+    }
+
+    listener.Prefixes.Add("http://" + config.Address + ":" + config.Port + "/");
+    listener.Start();
+    Console.WriteLine("Server started");
+
+    Thread serverThread = new Thread(ServerThread);
+    serverThread.Start();
+
+
+    Console.WriteLine("Press 'stop' to stop the server.");
+    Console.ReadLine();
+    listener.Stop();
 }
+catch(Exception ex)
+{
+
+}
+finally
+{
+    Console.WriteLine("Работа сервера завершена");
+}
+
+//while (true)
+//{
+//    if (Console.ReadLine() == "stop")
+//    {
+//        listener.Stop();
+//        Console.WriteLine("Server stopped.");
+//        break;
+//    }
+//}
 
 
 

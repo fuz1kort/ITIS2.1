@@ -1,39 +1,4 @@
-﻿//using System.Net;
-//using System.Text;
-
-
-//HttpListener server = new HttpListener(); 
-//// установка адресов прослушки
-//server.Prefixes.Add("http://127.0.0.1:1235/");
-//server.Start(); // начинаем прослушивать входящие подключения
-
-//Console.WriteLine("Сервер был запущен");
-
-//var serverThread = new Thread(ServerThread);
-//serverThread.Start();
-//void ServerThread()
-//{
-//    while (true)
-//    {
-//        var context = server.GetContext();
-
-
-//        byte[] buffer = File.ReadAllBytes(@"C:\Users\gafar\Source\Repos\fuz1kort\ITIS2.1\Google\index.html");
-//        // получаем поток ответа и пишем в него ответ
-//        context.Response.ContentLength64 = buffer.Length;
-//        context.Response.OutputStream.Write(buffer, 0, buffer.Length);
-//        // отправляем данные
-//        Console.WriteLine("Запрос обработан");
-
-//        if (Console.ReadLine() == "stop")
-//        {
-//            server.Stop();
-//            break;
-//        }
-//    }
-//}
-
-using System;
+﻿using System;
 using System.IO;
 using System.Net;
 using System.Threading;

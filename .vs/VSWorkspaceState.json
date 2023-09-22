@@ -1,9 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\Google",
-    "\\MyHttpServer"
+    ""
   ],
-  "SelectedNode": "\\MyHttpServer\\Program.cs",
+  "SelectedNode": "\\MyHttpServer.sln",
   "PreviewInSolutionExplorer": false
 }

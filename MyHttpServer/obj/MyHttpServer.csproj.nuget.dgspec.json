@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Marat\\source\\repos\\fuz1kort\\ITIS2.1\\MyHttpServer\\MyHttpServer.csproj": {}
+    "C:\\Users\\gafar\\source\\repos\\fuz1kort\\ITIS2.1\\MyHttpServer\\MyHttpServer.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Marat\\source\\repos\\fuz1kort\\ITIS2.1\\MyHttpServer\\MyHttpServer.csproj": {
+    "C:\\Users\\gafar\\source\\repos\\fuz1kort\\ITIS2.1\\MyHttpServer\\MyHttpServer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Marat\\source\\repos\\fuz1kort\\ITIS2.1\\MyHttpServer\\MyHttpServer.csproj",
+        "projectUniqueName": "C:\\Users\\gafar\\source\\repos\\fuz1kort\\ITIS2.1\\MyHttpServer\\MyHttpServer.csproj",
         "projectName": "MyHttpServer",
-        "projectPath": "C:\\Users\\Marat\\source\\repos\\fuz1kort\\ITIS2.1\\MyHttpServer\\MyHttpServer.csproj",
-        "packagesPath": "C:\\Users\\Marat\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Marat\\source\\repos\\fuz1kort\\ITIS2.1\\MyHttpServer\\obj\\",
+        "projectPath": "C:\\Users\\gafar\\source\\repos\\fuz1kort\\ITIS2.1\\MyHttpServer\\MyHttpServer.csproj",
+        "packagesPath": "C:\\Users\\gafar\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\gafar\\source\\repos\\fuz1kort\\ITIS2.1\\MyHttpServer\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Marat\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\gafar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

@@ -27,3 +27,7 @@ C:\Users\gafar\Source\Repos\fuz1kort\ITIS2.1\MyHttpServer\obj\Debug\net7.0\MyHtt
 C:\Users\gafar\Source\Repos\fuz1kort\ITIS2.1\MyHttpServer\obj\Debug\net7.0\MyHttpServer.genruntimeconfig.cache
 C:\Users\gafar\Source\Repos\fuz1kort\ITIS2.1\MyHttpServer\obj\Debug\net7.0\ref\MyHttpServer.dll
 C:\Users\gafar\Source\Repos\fuz1kort\ITIS2.1\MyHttpServer\bin\Debug\net7.0\appsetting.json
+C:\Users\Marat\source\repos\fuz1kort\ITIS2.1\MyHttpServer\bin\Debug\net7.0\Newtonsoft.Json.dll
+C:\Users\Marat\source\repos\fuz1kort\ITIS2.1\MyHttpServer\obj\Debug\net7.0\MyHttpServer.csproj.AssemblyReference.cache
+C:\Users\Marat\source\repos\fuz1kort\ITIS2.1\MyHttpServer\obj\Debug\net7.0\MyHttpServer.csproj.CopyComplete
+C:\Users\Marat\source\repos\fuz1kort\ITIS2.1\MyHttpServer\bin\Debug\net7.0\appsettings.json

@@ -2,12 +2,31 @@
 
 public class AppSettingsConfig
 {
-    [JsonProperty("address")]
-    public string Address { get; set; }
-    
-    [JsonProperty("port")]
-    public uint Port { get; set; }
+    public string Port { get; private set; }
+    public string Address { get; private set; }
+    public string StaticPathFiles { get; private set; }
+    public string MailSender { get; private set; }
+    public string PasswordSender { get; private set; }
+    public string ToEmail { get; private set; }
+    public string SmtpServerHost { get; private set; }
+    public ushort SmtpServerPort { get; private set; }
 
-    [JsonProperty("static_files_path")]
-    public string StaticPathFiles { get; set; }
+    public AppSettingsConfig(string port = "",
+        string address = "",
+        string staticFilesPath = "",
+        string mailSender = "",
+        string passwordSender = "",
+        string toEmail = "",
+        string smtpServerHost = "",
+        ushort smtpServerPort = 0)
+    {
+        Port = port;
+        Address = address;
+        StaticPathFiles = staticFilesPath;
+        MailSender = mailSender;
+        PasswordSender = passwordSender;
+        ToEmail = toEmail;
+        SmtpServerHost = smtpServerHost;
+        SmtpServerPort = smtpServerPort;
+    }
 }

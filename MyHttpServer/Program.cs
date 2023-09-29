@@ -1,15 +1,16 @@
-﻿using System.Net;
+﻿using System.Diagnostics.Tracing;
+using System.Net;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Nodes;
+using System.Xml.Schema;
 using MyHttpServer;
-using Newtonsoft.Json;
-using HttpListener = System.Net.HttpListener;
 
-class Program
+public class Program
 {
-    private const string PATH_CONFIGURATION = "appsettings.json";
-    static async Task Main()
+    public static async Task Main(string[] args)
     {
-        var server = new HttpServer();
+        var server = new ServerHandler();
         await server.Start();
-    }   
+    }
 }

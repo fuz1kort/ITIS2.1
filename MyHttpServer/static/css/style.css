@@ -1,7 +1,3 @@
-<style>* {
-    margin: 0;
-}
-
 body {
     font-family: "Object Sans", "Arial", "Helvetica", "Segoe UI Symbol",
         "Segoe MDL2 Assets", sans-serif;
@@ -41,7 +37,7 @@ body {
 }
 
 .logo.logo-horizontal {
-    background-image: url(https://bnetaccount.akamaized.net/login/static/images/toolkit/defaults/logos/bnet/logo-horizontal-color-light.1z1fI.svg);
+    background-image: url("../images/logo-horizontal-color-light.1z1fI.svg");
     margin: 0 auto 38px auto;
     background-size: contain;
     background-position: center;
@@ -90,49 +86,49 @@ body .external-login-container {
 }
 
 body .btn .icon-google {
-    background: url(https://bnetaccount.akamaized.net/login/static/images/login/social/google-logo-color.svg) no-repeat 0 0;
+    background: url("../images/google-logo-color.svg") no-repeat 0 0;
     opacity: 1;
     height: 18px;
     width: 18px;
 }
 
 body .btn .icon-facebook {
-    background: url(https://bnetaccount.akamaized.net/login/static/images/login/social/facebook-logo-white.svg) no-repeat 0 0;
+    background: url("../images/facebook-logo-white.svg") no-repeat 0 0;
     opacity: 1;
     height: 18px;
     width: 18px;
 }
 
 body .btn .icon-apple {
-    background: url(https://bnetaccount.akamaized.net/login/static/images/login/social/apple-logo-black.svg) no-repeat 0 0;
+    background: url("../images/apple-logo-black.svg") no-repeat 0 0;
     opacity: 1;
     height: 19px;
     width: 15px;
 }
 
 body .btn .icon-live {
-    background: url(https://bnetaccount.akamaized.net/login/static/images/login/social/xbox-logo-white.svg) no-repeat 0 0;
+    background: url("../images/xbox-logo-white.svg") no-repeat 0 0;
     opacity: 1;
     height: 18px;
     width: 18px;
 }
 
 body .btn .icon-psn {
-    background: url(https://bnetaccount.akamaized.net/login/static/images/login/social/playstation-logo-white.svg) no-repeat 0 0;
+    background: url("../images/playstation-logo-white.svg") no-repeat 0 0;
     opacity: 1;
     height: 15px;
     width: 21px;
 }
 
 body .btn .icon-nintendo {
-    background: url(https://bnetaccount.akamaized.net/login/static/images/login/social/switch-logo-white.svg) no-repeat 0 0;
+    background: url("../images/switch-logo-white.svg") no-repeat 0 0;
     opacity: 1;
     height: 16px;
     width: 16px;
 }
 
 body .btn .icon-steam {
-    background: url(https://bnetaccount.akamaized.net/login/static/images/login/social/steam-logo-black.svg) no-repeat 0 0;
+    background: url("../images/steam-logo-black.svg") no-repeat 0 0;
     opacity: 1;
     height: 16px;
     width: 16px;
@@ -531,5 +527,3 @@ ol {
     background-repeat: no-repeat;
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1NzYgNTEyIiBzdHlsZT0iJiMxMDsgICAgZmlsbDogIzAwYWVmZjsmIzEwOyI+PHBhdGggZD0iTTU2OS4zNTQgMjMxLjYzMUM1MTIuOTY5IDEzNS45NDkgNDA3LjgxIDcyIDI4OCA3MiAxNjguMTQgNzIgNjMuMDA0IDEzNS45OTQgNi42NDYgMjMxLjYzMWE0Ny45OTkgNDcuOTk5IDAgMCAwIDAgNDguNzM5QzYzLjAzMSAzNzYuMDUxIDE2OC4xOSA0NDAgMjg4IDQ0MGMxMTkuODYgMCAyMjQuOTk2LTYzLjk5NCAyODEuMzU0LTE1OS42MzFhNDcuOTk3IDQ3Ljk5NyAwIDAgMCAwLTQ4LjczOHpNMjg4IDM5MmMtNzUuMTYyIDAtMTM2LTYwLjgyNy0xMzYtMTM2IDAtNzUuMTYyIDYwLjgyNi0xMzYgMTM2LTEzNiA3NS4xNjIgMCAxMzYgNjAuODI2IDEzNiAxMzYgMCA3NS4xNjItNjAuODI2IDEzNi0xMzYgMTM2em0xMDQtMTM2YzAgNTcuNDM4LTQ2LjU2MiAxMDQtMTA0IDEwNHMtMTA0LTQ2LjU2Mi0xMDQtMTA0YzAtMTcuNzA4IDQuNDMxLTM0LjM3OSAxMi4yMzYtNDguOTczbC0uMDAxLjAzMmMwIDIzLjY1MSAxOS4xNzMgNDIuODIzIDQyLjgyNCA0Mi44MjNzNDIuODI0LTE5LjE3MyA0Mi44MjQtNDIuODIzYzAtMjMuNjUxLTE5LjE3My00Mi44MjQtNDIuODI0LTQyLjgyNGwtLjAzMi4wMDFDMjUzLjYyMSAxNTYuNDMxIDI3MC4yOTIgMTUyIDI4OCAxNTJjNTcuNDM4IDAgMTA0IDQ2LjU2MiAxMDQgMTA0eiIvPjwvc3ZnPg==);
 }
-
-</style>

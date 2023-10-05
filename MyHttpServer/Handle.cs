@@ -1,66 +1,114 @@
 ﻿using System.Net;
 using System.Text;
-using System.Text.Json.Nodes;
 using MyHttpServer.Configuration;
+
+// using MyHttpServer.Configuration;
+
+namespace MyHttpServer;
 
 class Handle
 {
-    private readonly HttpListener server;
-    private readonly AppSettingsConfig config;
-    public static string url = "http://127.0.0.1:1414/";
-    public const string filePath = "C:/Users/Marat/source/repos/fuz1kort/ITIS2.1/MyHttpServer/static/battlenet.html";
-    public static bool _running;
+    private readonly HttpListener _server;
+    private static bool _running;
+    private AppSettingsConfig _config;
 
-    public Handle()
+    public Handle(HttpListener server, AppSettingsConfig config)
     {
-        server = new HttpListener();
-        config = new AppSettingsConfig();
-        _running = false;
+        _server = server;
+        _config = config;
+        _running = true;
     }
 
-    public void Run()
-    {
-        server.Prefixes.Add(url);
-        server.Start();
-        Console.WriteLine("Сервер запущен: {0}", url);
-
-        Task serverTask = HandleIncomingConnections();
-        serverTask.GetAwaiter().GetResult();
-
-        Console.WriteLine("Сервер прекратил работу");
-        server.Stop();
-    }
 
     public void Stop()
     {
         Console.WriteLine("Получена команда на остановку сервера.");
-        server.Close();
+        _server.Close();
         _running = false;
         Console.WriteLine("Сервер остановлен.");
     }
 
-    public async Task HandleIncomingConnections()
+    public void Run()
     {
-
-
         while (_running)
         {
-            var context = await server.GetContextAsync();
-            var response = context.Response;
+            try
+            {
+                var context = _server.GetContext();
+                var response = context.Response;
+                var request = context.Request;
 
-            var fileContent = await File.ReadAllTextAsync(filePath);
-
-
-            var buffer = Encoding.UTF8.GetBytes(fileContent);
-
-            response.ContentLength64 = buffer.Length;
-            response.ContentType = "text/html";
-            response.ContentEncoding = Encoding.UTF8;
-            await using Stream output = response.OutputStream;
-
-            await output.WriteAsync(buffer);
-            await output.FlushAsync();
-            response.Close();
+                var requestUrl = request.Url.LocalPath;
+                if (requestUrl.EndsWith(".html") || requestUrl.EndsWith('/'))
+                {
+                    var filePath = Path.Combine(_config.StaticFilesPath, requestUrl.TrimStart('/'));
+                    Console.WriteLine(filePath);
+                    if (filePath.EndsWith("static"))
+                    {
+                        response.ContentType = "text/html;";
+                        var buffer = File.ReadAllBytes(Path.Combine(_config.StaticFilesPath, "index.html"));
+                        response.ContentLength64 = buffer.Length;
+                        response.OutputStream.WriteAsync(buffer, 0, buffer.Length);
+                    }
+                    
+                    else if (filePath.EndsWith(".css"))
+                    {
+                        response.ContentType = "text/css";
+                        var buffer = File.ReadAllBytes(filePath);
+                        response.ContentLength64 = buffer.Length;
+                        response.OutputStream.WriteAsync(buffer, 0, buffer.Length);
+                    }
+                    
+                    
+                    else if (filePath.EndsWith(".jpg") || filePath.EndsWith(".jpeg"))
+                    {
+                        response.ContentType = "image/jpeg";
+                        var buffer = File.ReadAllBytes(filePath);
+                        response.ContentLength64 = buffer.Length;
+                        response.OutputStream.WriteAsync(buffer, 0, buffer.Length);
+                    }
+                    
+                    else if (filePath.EndsWith(".png"))
+                    {
+                        response.ContentType = "image/png";
+                        var buffer = File.ReadAllBytes(filePath);
+                        response.ContentLength64 = buffer.Length;
+                        response.OutputStream.WriteAsync(buffer, 0, buffer.Length);
+                    }
+                    
+                    else if (filePath.EndsWith(".svg"))
+                    {
+                        response.ContentType = "image/svg+xml";
+                        var buffer = File.ReadAllBytes(filePath);
+                        response.ContentLength64 = buffer.Length;
+                        response.OutputStream.WriteAsync(buffer, 0, buffer.Length);
+                    }
+                    
+                    else if (filePath.EndsWith(".ico"))
+                    {
+                        response.ContentType = "image/x-icon";
+                        var buffer = File.ReadAllBytes(filePath);
+                        response.ContentLength64 = buffer.Length;
+                        response.OutputStream.WriteAsync(buffer, 0, buffer.Length);
+                    }
+                    
+                    else
+                    {
+                        response.StatusCode = (int)HttpStatusCode.NotFound;
+                        response.ContentType = "text/plain; charset=utf-8";
+                        var notFoundMessage = "404 File Not Found - файл не найден";
+                        var buffer = Encoding.UTF8.GetBytes(notFoundMessage);
+                        response.ContentLength64 = buffer.Length;
+                        response.OutputStream.WriteAsync(buffer, 0, buffer.Length);
+                        Console.WriteLine("File not founded");
+                    }
+                }
+                response.Close();
+            }
+            catch (HttpListenerException ex) when (ex.ErrorCode == 995)
+            {
+                break;
+            }
         }
     }
 }

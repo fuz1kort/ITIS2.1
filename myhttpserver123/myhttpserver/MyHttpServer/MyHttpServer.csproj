@@ -11,9 +11,6 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="static\test.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Update="static\index.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -34,3 +34,19 @@ C:\Users\timer\Downloads\Telegram Desktop\test-my-gitlab\test-my-gitlab\myhttpse
 C:\Users\timer\Downloads\Telegram Desktop\test-my-gitlab\test-my-gitlab\myhttpserver\MyHttpServer\obj\Debug\net7.0\MyHttpServer.pdb
 C:\Users\timer\Downloads\Telegram Desktop\test-my-gitlab\test-my-gitlab\myhttpserver\MyHttpServer\obj\Debug\net7.0\MyHttpServer.genruntimeconfig.cache
 C:\Users\timer\Downloads\Telegram Desktop\test-my-gitlab\test-my-gitlab\myhttpserver\MyHttpServer\obj\Debug\net7.0\ref\MyHttpServer.dll
+C:\Users\gafar\source\repos\fuz1kort\ITIS2.1\myhttpserver123\myhttpserver\MyHttpServer\bin\Debug\net7.0\MyHttpServer.exe
+C:\Users\gafar\source\repos\fuz1kort\ITIS2.1\myhttpserver123\myhttpserver\MyHttpServer\bin\Debug\net7.0\appsettings.json
+C:\Users\gafar\source\repos\fuz1kort\ITIS2.1\myhttpserver123\myhttpserver\MyHttpServer\bin\Debug\net7.0\static\index.html
+C:\Users\gafar\source\repos\fuz1kort\ITIS2.1\myhttpserver123\myhttpserver\MyHttpServer\bin\Debug\net7.0\MyHttpServer.deps.json
+C:\Users\gafar\source\repos\fuz1kort\ITIS2.1\myhttpserver123\myhttpserver\MyHttpServer\bin\Debug\net7.0\MyHttpServer.runtimeconfig.json
+C:\Users\gafar\source\repos\fuz1kort\ITIS2.1\myhttpserver123\myhttpserver\MyHttpServer\bin\Debug\net7.0\MyHttpServer.dll
+C:\Users\gafar\source\repos\fuz1kort\ITIS2.1\myhttpserver123\myhttpserver\MyHttpServer\bin\Debug\net7.0\MyHttpServer.pdb
+C:\Users\gafar\source\repos\fuz1kort\ITIS2.1\myhttpserver123\myhttpserver\MyHttpServer\obj\Debug\net7.0\MyHttpServer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\gafar\source\repos\fuz1kort\ITIS2.1\myhttpserver123\myhttpserver\MyHttpServer\obj\Debug\net7.0\MyHttpServer.AssemblyInfoInputs.cache
+C:\Users\gafar\source\repos\fuz1kort\ITIS2.1\myhttpserver123\myhttpserver\MyHttpServer\obj\Debug\net7.0\MyHttpServer.AssemblyInfo.cs
+C:\Users\gafar\source\repos\fuz1kort\ITIS2.1\myhttpserver123\myhttpserver\MyHttpServer\obj\Debug\net7.0\MyHttpServer.csproj.CoreCompileInputs.cache
+C:\Users\gafar\source\repos\fuz1kort\ITIS2.1\myhttpserver123\myhttpserver\MyHttpServer\obj\Debug\net7.0\MyHttpServer.dll
+C:\Users\gafar\source\repos\fuz1kort\ITIS2.1\myhttpserver123\myhttpserver\MyHttpServer\obj\Debug\net7.0\refint\MyHttpServer.dll
+C:\Users\gafar\source\repos\fuz1kort\ITIS2.1\myhttpserver123\myhttpserver\MyHttpServer\obj\Debug\net7.0\MyHttpServer.pdb
+C:\Users\gafar\source\repos\fuz1kort\ITIS2.1\myhttpserver123\myhttpserver\MyHttpServer\obj\Debug\net7.0\MyHttpServer.genruntimeconfig.cache
+C:\Users\gafar\source\repos\fuz1kort\ITIS2.1\myhttpserver123\myhttpserver\MyHttpServer\obj\Debug\net7.0\ref\MyHttpServer.dll

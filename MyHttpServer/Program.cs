@@ -20,7 +20,7 @@ public class Program
         server.Start();
         Console.WriteLine("Сервер запущен: {0}", prefix);
 
-        var handle = new Handle(server, config);
+        var handle = new ServerHandler(server, config);
         
         
         

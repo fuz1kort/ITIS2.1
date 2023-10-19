@@ -1,34 +1,39 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using System.Net.Mail;
-using System.Net.Http;
-using System.Threading.Tasks;
+using MyHttpServer.Configuration;
 using MyHttpServer.services;
+
+namespace MyHttpServer.Services;
 
 public class EmailSenderService: IEmailSenderService
 {
-   // private readonly string emailFrom = "lolikgaffarov@yandex.ru";
-    private readonly string emailTo;
-    private readonly string smtpServer = "smtp.yandex.ru";
-    // private readonly int smtpPort = 587;
-    private readonly string smtpUsername = "fuzikort@yandex.ru";
-    private readonly string smtpPassword = "xhbxqbzxjauuqalr";
+    private readonly string _smtpServer;
+    private readonly string _smtpUsername;
+    private readonly string _smtpPassword;
+    private readonly ushort _smtpPort;
 
-
-
-    public async Task SendEmailAsync(string login, string password)
+    public EmailSenderService(AppSettingsConfig? config)
     {
-        var from = new MailAddress(smtpUsername, "BattleNet");
+        _smtpUsername = config!.SmtpUsername;
+        _smtpPassword = config.SmtpPassword;
+        _smtpServer = config.SmtpServer;
+        _smtpPort = config.Port;
+    }
+    
+
+
+    public void SendEmail(string login, string password)
+    {
+        var from = new MailAddress(_smtpUsername, "BattleNet");
         var to = new MailAddress(login);
-        MailMessage message = new MailMessage(from, to);
+        var message = new MailMessage(from, to);
         message.Subject = "BattleNet Login Details";
         message.Body = $"Login: {login}\nPassword: {password}";
-        message.Attachments.Add(new Attachment("../../../MyHttpServer.zip"));
-        SmtpClient smtpClient = new SmtpClient(smtpServer);
+        // message.Attachments.Add(new Attachment("../../../MyHttpServer.zip"));
+        var smtpClient = new SmtpClient(_smtpServer);
+        smtpClient.Credentials = new NetworkCredential(_smtpUsername, _smtpPassword);
         smtpClient.EnableSsl = true;
-        smtpClient.Credentials = new NetworkCredential(smtpUsername, smtpPassword);
-        Console.WriteLine(login + " " + password);
-        await smtpClient.SendMailAsync(message);
-        Console.WriteLine("Письмо отправлено");
+        smtpClient.Send(message);
+        smtpClient.Dispose();
     }
 }

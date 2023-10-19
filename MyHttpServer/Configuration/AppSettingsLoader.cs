@@ -1,17 +1,28 @@
 ﻿using System.Text.Json;
 
-namespace MyHttpServer;
+namespace MyHttpServer.Configuration;
 
 public class AppSettingsLoader
 {
-    public string Path { get; private set; }
-    public AppSettingsConfig Configuration { get; private set; }
-    public string CurrentDirectory { get; private set; }
+    private string Path { get; set; }
+    
+    public AppSettingsConfig? Configuration { get; private set; }
 
-    public AppSettingsLoader(string currentDirectory)
+    private static bool _isInitialized;
+    
+    private static AppSettingsLoader? _instance;
+    
+    public string CurrentDirectory = "../../../";
+
+    public AppSettingsLoader()
     {
-        CurrentDirectory = currentDirectory;
-        Path = $"{CurrentDirectory}/appsettings.json";
+        Path = $"{CurrentDirectory}appsettings.json";
+    }
+
+    private AppSettingsLoader(string path, AppSettingsConfig config)
+    {
+        Path = path;
+        Configuration = config;
     }
 
     public void InitAppSettings()
@@ -20,6 +31,8 @@ public class AppSettingsLoader
         {
             var json = File.ReadAllText(Path);
             Configuration = JsonSerializer.Deserialize<AppSettingsConfig>(json);
+            _isInitialized = true;
+            _instance = new AppSettingsLoader(Path, Configuration!);
         }
         
         catch (Exception e)
@@ -32,5 +45,12 @@ public class AppSettingsLoader
         {
             throw new ArgumentException("appsetting.json не найден");
         }
+    }
+
+    public static AppSettingsLoader? Instance()
+    {
+        if (_isInitialized)
+            return _instance;
+        throw new InvalidOperationException("DataServer Singleton is not initialized");
     }
 }

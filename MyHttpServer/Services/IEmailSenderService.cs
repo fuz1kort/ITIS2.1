@@ -2,5 +2,5 @@
 
 public interface IEmailSenderService
 {
-    public Task SendEmailAsync(string login, string password);
+    public void SendEmail(string login, string password);
 }

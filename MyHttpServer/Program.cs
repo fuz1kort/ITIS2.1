@@ -5,10 +5,11 @@ namespace MyHttpServer;
 
 public class Program
 {
-    static void Main()
+    private static void Main()
     {
         var listener = new HttpListener();
         var server = new ServerHandler(listener);
         server.Start();
+        
     }
 }

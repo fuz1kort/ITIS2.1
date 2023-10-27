@@ -45,3 +45,5 @@ C:\Users\gafar\source\repos\fuz1kort\ITIS2.1\MyHttpServer\bin\Debug\net7.0\MimeK
 C:\Users\gafar\source\repos\fuz1kort\ITIS2.1\MyHttpServer\bin\Debug\net7.0\System.Security.Cryptography.Pkcs.dll
 C:\Users\gafar\source\repos\fuz1kort\ITIS2.1\MyHttpServer\bin\Debug\net7.0\runtimes\win\lib\net7.0\System.Security.Cryptography.Pkcs.dll
 C:\Users\Marat\source\repos\fuz1kort\ITIS2.1\MyHttpServer\bin\Debug\net7.0\HtmlAgilityPack.dll
+C:\Users\Marat\source\repos\fuz1kort\ITIS2.1\MyHttpServer\bin\Debug\net7.0\MyORM.dll
+C:\Users\Marat\source\repos\fuz1kort\ITIS2.1\MyHttpServer\bin\Debug\net7.0\MyORM.pdb

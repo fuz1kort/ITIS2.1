@@ -1,6 +1,4 @@
-﻿using MyHttpServer.Attributes;
-
-namespace MyHttpServer.Controllers;
+﻿namespace MyHttpServer.Attributes;
 
 public class GetAttribute : HttpMethodAttribute
 {

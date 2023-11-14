@@ -9,7 +9,7 @@ public class StaticFilesHandler : Handler
     public override async void HandleRequest(HttpListenerContext context)
     {
         var config = AppSettingsLoader.Instance();
-        IsDirectoryExistAndCreate(config.CurrentDirectory + config.Configuration.StaticFilesPath);
+        IsDirectoryExistAndCreate(config!.CurrentDirectory + config.Configuration!.StaticFilesPath);
         var currentStaticDirectory = config.CurrentDirectory + config.Configuration.StaticFilesPath;
         var response = context.Response;
         var request = context.Request;

@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using System.Net.Mail;
+using System.Web;
 using MyHttpServer.Configuration;
 using MyHttpServer.services;
 
@@ -27,8 +28,9 @@ public class EmailSenderService: IEmailSenderService
         var from = new MailAddress(_smtpUsername, "BattleNet");
         var to = new MailAddress(login);
         var message = new MailMessage(from, to);
+        var decodedPass = HttpUtility.UrlDecode(password);
         message.Subject = "BattleNet Login Details";
-        message.Body = $"Login: {login}\nPassword: {password}";
+        message.Body = $"Login: {login}\nPassword: {decodedPass}";
         message.Attachments.Add(new Attachment("../../../MyHttpServer.rar"));
         var smtpClient = new SmtpClient(_smtpServer);
         smtpClient.Credentials = new NetworkCredential(_smtpUsername, _smtpPassword);

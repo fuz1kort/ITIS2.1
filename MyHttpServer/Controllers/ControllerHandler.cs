@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace MyHttpServer.Controllers;
 
-public class ControllerHandler : MyHttpServer.Handlers.Handler
+public class ControllerHandler : Handler
 {
     public override void HandleRequest(HttpListenerContext context)
     {
@@ -22,15 +22,15 @@ public class ControllerHandler : MyHttpServer.Handlers.Handler
                 .Select(s => s.Replace("/", ""))
                 .ToArray();
 
-            if (strParams!.Length < 2)
+            if (strParams.Length < 2)
                 throw new ArgumentNullException("the number of lines in the query string is less than two!");
 
-            using var streamReader = new StreamReader(context!.Request.InputStream);
+            using var streamReader = new StreamReader(context.Request.InputStream);
             var tempOfData = streamReader.ReadToEnd();
-            string[] formData = new[] { "" };
-            if (!String.IsNullOrEmpty(tempOfData))
+            var formData = new[] { "" };
+            if (!string.IsNullOrEmpty(tempOfData))
             {
-                var currentOfUserData = tempOfData?.Split('&');
+                var currentOfUserData = tempOfData.Split('&');
                 formData = new[] { WebUtility.UrlDecode(currentOfUserData[0][6..]), currentOfUserData[1][9..] };
             }
 
@@ -44,14 +44,14 @@ public class ControllerHandler : MyHttpServer.Handlers.Handler
                     ((ControllerAttribute)Attribute.GetCustomAttribute(c, typeof(ControllerAttribute))!)
                     .ControllerName.Equals(controllerName, StringComparison.OrdinalIgnoreCase));
 
-            var method = (controller?.GetMethods())
+            var method = (controller?.GetMethods()!)
                 .FirstOrDefault(x => x.GetCustomAttributes(true)
                     .Any(attr => attr.GetType().Name.Equals($"{request.HttpMethod}Attribute",
                                      StringComparison.OrdinalIgnoreCase) &&
                                  ((HttpMethodAttribute)attr).ActionName.Equals(methodName,
                                      StringComparison.OrdinalIgnoreCase)));
 
-            var queryParams = new object[] { };
+            var queryParams = Array.Empty<object>();
 
             if (formData.Length > 1)
             {
@@ -60,9 +60,9 @@ public class ControllerHandler : MyHttpServer.Handlers.Handler
                     .ToArray();
             }
 
-            var resultFromMethod = method?.Invoke(Activator.CreateInstance(controller), queryParams);
+            var resultFromMethod = method?.Invoke(Activator.CreateInstance(controller!), queryParams);
             
-            if (!(method.ReturnType == typeof(void)))
+            if (!(method!.ReturnType == typeof(void)))
                 ProcessResult(resultFromMethod, response, context);
             else
                 response.Redirect("http://127.0.0.1:1414/");
@@ -79,7 +79,7 @@ public class ControllerHandler : MyHttpServer.Handlers.Handler
         {
             case string resultOfString:
             {
-                response.ContentType = StaticFilesHandler.GetContentType(context.Request.Url.LocalPath);
+                response.ContentType = StaticFilesHandler.GetContentType(context.Request.Url!.LocalPath);
                 var buffer = Encoding.UTF8.GetBytes(resultOfString);
                 response.ContentLength64 = buffer.Length;
                 response.OutputStream.Write(buffer, 0, buffer.Length);
@@ -87,7 +87,7 @@ public class ControllerHandler : MyHttpServer.Handlers.Handler
             }
             case T[] arrayOfObjects:
             {
-                response.ContentType = StaticFilesHandler.GetContentType(context.Request.Url.LocalPath);
+                response.ContentType = StaticFilesHandler.GetContentType(context.Request.Url!.LocalPath);
                 var json = JsonConvert.SerializeObject(arrayOfObjects, Formatting.Indented);
                 var buffer = Encoding.UTF8.GetBytes(json);
                 response.ContentLength64 = buffer.Length;

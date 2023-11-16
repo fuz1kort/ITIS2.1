@@ -1,12 +1,12 @@
 ﻿using System.Data.SqlClient;
 
-namespace AdoNetConsoleApp
+namespace Example_1
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=StripClub;Integrated Security=True;Connect Timeout=30;Encrypt=False";
+            string connectionString = @"Server=(localdb)\MSSQLLocalDB;Database=MyORMExample";
 
             // Создание подключения
             SqlConnection connection = new SqlConnection(connectionString);

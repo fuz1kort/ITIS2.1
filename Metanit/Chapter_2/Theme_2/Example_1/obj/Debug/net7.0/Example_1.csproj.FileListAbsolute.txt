@@ -1,0 +1,14 @@
+C:\Users\gafar\RiderProjects\ITIS2.1\Metanit\Chapter_2\Theme_2\Example_1\bin\Debug\net7.0\Example_1.exe
+C:\Users\gafar\RiderProjects\ITIS2.1\Metanit\Chapter_2\Theme_2\Example_1\bin\Debug\net7.0\Example_1.deps.json
+C:\Users\gafar\RiderProjects\ITIS2.1\Metanit\Chapter_2\Theme_2\Example_1\bin\Debug\net7.0\Example_1.runtimeconfig.json
+C:\Users\gafar\RiderProjects\ITIS2.1\Metanit\Chapter_2\Theme_2\Example_1\bin\Debug\net7.0\Example_1.dll
+C:\Users\gafar\RiderProjects\ITIS2.1\Metanit\Chapter_2\Theme_2\Example_1\bin\Debug\net7.0\Example_1.pdb
+C:\Users\gafar\RiderProjects\ITIS2.1\Metanit\Chapter_2\Theme_2\Example_1\obj\Debug\net7.0\Example_1.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\gafar\RiderProjects\ITIS2.1\Metanit\Chapter_2\Theme_2\Example_1\obj\Debug\net7.0\Example_1.AssemblyInfoInputs.cache
+C:\Users\gafar\RiderProjects\ITIS2.1\Metanit\Chapter_2\Theme_2\Example_1\obj\Debug\net7.0\Example_1.AssemblyInfo.cs
+C:\Users\gafar\RiderProjects\ITIS2.1\Metanit\Chapter_2\Theme_2\Example_1\obj\Debug\net7.0\Example_1.csproj.CoreCompileInputs.cache
+C:\Users\gafar\RiderProjects\ITIS2.1\Metanit\Chapter_2\Theme_2\Example_1\obj\Debug\net7.0\Example_1.dll
+C:\Users\gafar\RiderProjects\ITIS2.1\Metanit\Chapter_2\Theme_2\Example_1\obj\Debug\net7.0\refint\Example_1.dll
+C:\Users\gafar\RiderProjects\ITIS2.1\Metanit\Chapter_2\Theme_2\Example_1\obj\Debug\net7.0\Example_1.pdb
+C:\Users\gafar\RiderProjects\ITIS2.1\Metanit\Chapter_2\Theme_2\Example_1\obj\Debug\net7.0\Example_1.genruntimeconfig.cache
+C:\Users\gafar\RiderProjects\ITIS2.1\Metanit\Chapter_2\Theme_2\Example_1\obj\Debug\net7.0\ref\Example_1.dll

@@ -470,24 +470,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\gafar\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\Marat\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\gafar\\RiderProjects\\ITIS2.1\\Metanit\\Chapter_2\\Theme_10\\Example_1\\Example_1.csproj",
+      "projectUniqueName": "C:\\Users\\Marat\\source\\repos\\fuz1kort\\ITIS2.1\\Metanit\\Chapter_2\\Theme_10\\Example_1\\Example_1.csproj",
       "projectName": "Example_1",
-      "projectPath": "C:\\Users\\gafar\\RiderProjects\\ITIS2.1\\Metanit\\Chapter_2\\Theme_10\\Example_1\\Example_1.csproj",
-      "packagesPath": "C:\\Users\\gafar\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\gafar\\RiderProjects\\ITIS2.1\\Metanit\\Chapter_2\\Theme_10\\Example_1\\obj\\",
+      "projectPath": "C:\\Users\\Marat\\source\\repos\\fuz1kort\\ITIS2.1\\Metanit\\Chapter_2\\Theme_10\\Example_1\\Example_1.csproj",
+      "packagesPath": "C:\\Users\\Marat\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Marat\\source\\repos\\fuz1kort\\ITIS2.1\\Metanit\\Chapter_2\\Theme_10\\Example_1\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\gafar\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\Marat\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

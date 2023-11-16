@@ -80,18 +80,12 @@ public class MyDataContext : IMyDataContext
         return true;
     }
 
-    public bool Delete<T>(T entity)
+    public bool Delete<T>(int id)
     {
         using var connection = new SqlConnection(_connectionString);
         try
         {
             connection.Open();
-
-            var id = typeof(T)
-                .GetProperties()
-                .First(i => i.Name == "Id" || i.Name == "id")
-                .GetValue(entity);
-            
             var tableName = typeof(T).Name;
             var query = $"DELETE FROM {tableName}s WHERE id = {id}";
             var command = new SqlCommand();

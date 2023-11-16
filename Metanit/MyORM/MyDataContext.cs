@@ -5,6 +5,8 @@ namespace MyORM;
 public class MyDataContext : IMyDataContext
 {
     private readonly string _connectionString;
+    
+    public MyDataContext() { }
 
     public MyDataContext(string connectionString) => _connectionString = connectionString;
     

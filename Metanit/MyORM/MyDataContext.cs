@@ -1,6 +1,4 @@
-using System.Data;
 using System.Data.SqlClient;
-using System.Text;
 
 namespace MyORM;
 
@@ -13,144 +11,172 @@ public class MyDataContext : IMyDataContext
     public bool Add<T>(T entity)
     {
         using var connection = new SqlConnection(_connectionString);
-        var type = entity?.GetType();
-        var tableName = type?.Name;
-        var properties = type!.GetProperties().Where(prop => !prop.Name.Equals("id"));
-        // var properties = type!.GetProperties();
-        connection.Open();
-
-        var command = new SqlCommand();
-        command.Connection = connection;
-        var query = new StringBuilder();
-        var exp = $"INSERT INTO {tableName}s (";
-        query.Append(exp);
-        foreach (var prop in properties)
+        try
         {
-            query.Append($"{prop.Name},");
+            connection.Open();
+            var columns = typeof(T).GetProperties().Select(i => i.Name)
+                .Where(i => i != "Id" && i != "id");
+            var values = "(" +
+                         string.Join(",", typeof(T).GetProperties()
+                             .Skip(1)
+                             .Select(i => i.GetValue(entity))
+                             .Select(i => $"'{i}'"))
+                         + ")";
+            var tableName = typeof(T).Name;
+            var query = $"INSERT INTO {tableName}s ({string.Join(",", columns)}) VALUES {values}";
+            var command = new SqlCommand();
+            command.CommandText = query;
+            command.Connection = connection;
+            command.ExecuteNonQuery();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
         }
 
-        query.Length--;
-
-        Console.WriteLine(query);
-        query.Append(") VALUES (");
-
-        foreach (var prop in properties)
-        {
-            query.Append($"\'{prop.GetValue(entity)}\',");
-        }
-
-        query.Length--;
-        query.Append(")");
-        Console.WriteLine(query.ToString());
-        command.CommandText = query.ToString();
-        command.ExecuteNonQuery();
-        connection.Close();
         return true;
     }
 
     public bool Update<T>(T entity)
     {
-        var type = entity?.GetType();
-        var tableName = type?.Name;
-        var id = type?.GetProperty("Id");
-        var props = type!.GetProperties()
-            .Where(x => !x.Name.Equals("id", StringComparison.OrdinalIgnoreCase))
-            .ToList();
-
-        var sqlExpression = $"SELECT * FROM {tableName}s WHERE \'id\' = {id?.GetValue(entity)}";
         using var connection = new SqlConnection(_connectionString);
-        connection.Open();
-        var adapter = new SqlDataAdapter(sqlExpression, connection);
-        var dataSet = new DataSet();
-        adapter.Fill(dataSet);
-
-        var entityFromDatabase = dataSet.Tables[0];
-        var rowToUpdate = entityFromDatabase.Rows[0];
-
-        foreach (var prop in props)
+        try
         {
-            var val = prop.GetValue(entity);
-            rowToUpdate[prop.Name] = val ?? DBNull.Value;
-        }
+            connection.Open();
+            var columns = typeof(T).GetProperties().Select(i => i.Name)
+                .ToArray();
+            var values = typeof(T).GetProperties()
+                .Select(i => i.GetValue(entity)!.ToString())
+                .ToArray();
 
-        // var commandBuilder = new SqlCommandBuilder(adapter);
-        // adapter.UpdateCommand = commandBuilder.GetUpdateCommand();
-        adapter.Update(dataSet);
-
-        return true;
-    }
-
-    public bool Delete<T>(int id)
-    {
-        var type = typeof(T);
-        var tableName = type.Name;
-
-        var sqlExpression = $"DELETE FROM {tableName}s WHERE id = \'{id}\'";
-        using var connection = new SqlConnection(_connectionString);
-        connection.Open();
-        var command = new SqlCommand(sqlExpression, connection);
-        command.ExecuteNonQuery();
-        Console.WriteLine("Deleted object by id: {0}", id);
-        return true;
-    }
-
-    public List<T> Select<T>(T entity)
-    {
-        var type = entity?.GetType();
-        var tableName = type?.Name;
-
-        var sqlExpression = $"SELECT * FROM \"{tableName}s\"";
-        using var connection = new SqlConnection(_connectionString);
-        connection.Open();
-        var adapter = new SqlDataAdapter(sqlExpression, connection);
-        var dataSet = new DataSet();
-        adapter.Fill(dataSet);
-        var listOfTableItems = dataSet.Tables[0];
-        var listOfEntities = new List<T>();
-
-        foreach (DataRow row in listOfTableItems.Rows)
-        {
-            var objOfEntity = Activator.CreateInstance<T>();
-            foreach (DataColumn column in listOfTableItems.Columns)
+            var preQuery = new string[columns.Length];
+            for (var i = 0; i < columns.Length; i++)
             {
-                var prop = type!.GetProperty(column.ColumnName);
-                if (prop != null && row[column] != DBNull.Value)
-                    prop.SetValue(objOfEntity, row[column]);
+                if (int.TryParse(values[i], out _))
+                    preQuery[i] = $"{columns[i]} = {values[i]}";
+                else
+                    preQuery[i] = $"{columns[i]} = '{values[i]}'";
             }
 
-            listOfEntities.Add(objOfEntity);
+            var id = typeof(T)
+                .GetProperties()
+                .First(i => i.Name == "Id" || i.Name == "id")
+                .GetValue(entity);
+        
+            var tableName = typeof(T).Name;
+            var query = $"UPDATE {tableName}s SET {string.Join(",", preQuery)} WHERE id = {id}";
+            var command = new SqlCommand();
+            command.CommandText = query;
+            command.Connection = connection;
+            command.ExecuteNonQuery();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
         }
 
-        return listOfEntities;
+        return true;
+    }
+
+    public bool Delete<T>(T entity)
+    {
+        using var connection = new SqlConnection(_connectionString);
+        try
+        {
+            connection.Open();
+
+            var id = typeof(T)
+                .GetProperties()
+                .First(i => i.Name == "Id" || i.Name == "id")
+                .GetValue(entity);
+            
+            var tableName = typeof(T).Name;
+            var query = $"DELETE FROM {tableName}s WHERE id = {id}";
+            var command = new SqlCommand();
+            command.CommandText = query;
+            command.Connection = connection;
+            command.ExecuteNonQuery();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+
+        return true;
+    }
+
+    public List<T> Select<T>()
+    {
+        var result = new List<T>();
+
+        using var connection = new SqlConnection(_connectionString);
+        try
+        {
+            connection.Open();
+            var properties = typeof(T).GetProperties();
+            var propertiesCount = properties.Length;
+             
+            var tableName = typeof(T).Name;
+            var query = $"SELECT * FROM {tableName}s";
+            var command = new SqlCommand();
+            command.CommandText = query;
+            command.Connection = connection;
+            var reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                var newInstance = (T)Activator.CreateInstance(typeof(T))!;
+                for (var i = 0; i < propertiesCount; i++)
+                    properties[i].SetValue(newInstance, reader[i]);
+                result.Add(newInstance);
+            }
+             
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+
+        return result;
     }
 
     public T SelectById<T>(int id)
     {
-        var tableName = typeof(T).Name;
-        var type = typeof(T);
-        var sqlExpression = $"SELECT * FROM {tableName}s WHERE id = \'{id}\'";
-        using var connection = new SqlConnection(_connectionString);
-        connection.Open();
-        var adapter = new SqlDataAdapter(sqlExpression, connection);
-        var dataSet = new DataSet();
-        adapter.Fill(dataSet);
-        var listOfArgs = dataSet.Tables[0];
-            
-        foreach (DataRow row in listOfArgs.Rows)
+        var result = new List<T>();
+    
+        using (var connection = new SqlConnection(_connectionString))
         {
-            var entity = Activator.CreateInstance<T>();
-            foreach (DataColumn column in listOfArgs.Columns)
+            try
             {
-                var prop = type.GetProperty(column.ColumnName);
-                if (prop != null && row[column] != DBNull.Value)
+                connection.Open();
+                var properties = typeof(T).GetProperties();
+                var propertiesCount = properties.Length;
+            
+                var tableName = typeof(T).Name;
+                var query = $"SELECT * FROM {tableName}s WHERE id = {id}";
+                var command = new SqlCommand();
+                command.CommandText = query;
+                command.Connection = connection;
+                var reader = command.ExecuteReader();
+                while (reader.Read())
                 {
-                    prop.SetValue(entity, row[column]);
+                    var newInstance = (T)Activator.CreateInstance(typeof(T))!;
+                    for (var i = 0; i < propertiesCount; i++)
+                        properties[i].SetValue(newInstance, reader[i]);
+                    result.Add(newInstance);
                 }
+            
             }
-
-            return entity;
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
 
-        return default!;
+        return result[0];
     }
 }

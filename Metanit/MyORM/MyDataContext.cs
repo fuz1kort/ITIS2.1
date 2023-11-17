@@ -8,8 +8,6 @@ public class MyDataContext : IMyDataContext
     
     public MyDataContext() { }
 
-    public MyDataContext() { }
-
     public MyDataContext(string connectionString) => _connectionString = connectionString;
     
     public bool Add<T>(T entity)

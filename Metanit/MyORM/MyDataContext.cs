@@ -14,9 +14,9 @@ public class MyDataContext : IMyDataContext
     
     public bool Add<T>(T entity)
     {
-        using var connection = new SqlConnection(_connectionString);
         try
         {
+            using var connection = new SqlConnection(_connectionString);
             connection.Open();
             var columns = typeof(T).GetProperties().Select(i => i.Name)
                 .Where(i => i != "Id" && i != "id");
@@ -44,9 +44,9 @@ public class MyDataContext : IMyDataContext
 
     public bool Update<T>(T entity)
     {
-        using var connection = new SqlConnection(_connectionString);
         try
         {
+            using var connection = new SqlConnection(_connectionString);
             connection.Open();
             var columns = typeof(T).GetProperties().Select(i => i.Name)
                 .ToArray();
@@ -86,9 +86,9 @@ public class MyDataContext : IMyDataContext
 
     public bool Delete<T>(int id)
     {
-        using var connection = new SqlConnection(_connectionString);
         try
         {
+            using var connection = new SqlConnection(_connectionString);
             connection.Open();
             var tableName = typeof(T).Name;
             var query = $"DELETE FROM {tableName}s WHERE id = {id}";
@@ -110,9 +110,9 @@ public class MyDataContext : IMyDataContext
     {
         var result = new List<T>();
 
-        using var connection = new SqlConnection(_connectionString);
         try
         {
+            using var connection = new SqlConnection(_connectionString);
             connection.Open();
             var properties = typeof(T).GetProperties();
             var propertiesCount = properties.Length;
@@ -144,11 +144,9 @@ public class MyDataContext : IMyDataContext
     public T SelectById<T>(int id)
     {
         var result = new List<T>();
-    
-        using (var connection = new SqlConnection(_connectionString))
-        {
             try
             {
+                using var connection = new SqlConnection(_connectionString);
                 connection.Open();
                 var properties = typeof(T).GetProperties();
                 var propertiesCount = properties.Length;
@@ -173,8 +171,6 @@ public class MyDataContext : IMyDataContext
                 Console.WriteLine(e);
                 throw;
             }
-        }
-
         return result[0];
     }
 }

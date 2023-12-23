@@ -22,9 +22,7 @@ try
     listener.Start();
     Console.WriteLine("Server started");
 
-    var serverThread = new Thread(ServerThread);
-    serverThread.Start();
-
+    Task.Run(ServerThread);
 
     Console.WriteLine("Press 'stop' to stop the server.");
     Console.ReadLine();
@@ -46,17 +44,11 @@ void ServerThread()
     while (listener.IsListening)
     {
         var context = listener.GetContext();
+        var response = context.Response;
         const string filePath = "../../../index.html";
-        if (File.Exists(filePath))
-        {
-            var fileBytes = File.ReadAllBytes(filePath);
-            context.Response.ContentLength64 = fileBytes.Length;
-            context.Response.OutputStream.Write(fileBytes, 0, fileBytes.Length);
-        }
-        else
-        {
-            context.Response.StatusCode = 404;
-        }
-        context.Response.OutputStream.Close();
+        var buffer = File.ReadAllBytes(filePath);
+        using var output = response.OutputStream;
+        output.Write(buffer);
+        output.Flush();
     }
 }

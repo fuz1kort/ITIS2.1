@@ -22,10 +22,28 @@ try
     listener.Start();
     Console.WriteLine("Server started");
 
-    Task.Run(ServerThread);
+    Task.Run(() =>
+    {
+        while (listener.IsListening)
+        {
+            var context = listener.GetContext();
+            var response = context.Response;
+            const string filePath = "../../../index.html";
+            var buffer = File.ReadAllBytes(filePath);
+            using var output = response.OutputStream;
+            output.Write(buffer);
+            output.Flush();
+        }
+    });
 
-    Console.WriteLine("Press 'stop' to stop the server.");
-    Console.ReadLine();
+    Console.WriteLine("Write 'stop' to stop the server.");
+
+    await Task.Run(() =>
+    {
+        while (true)
+            if (Console.ReadLine()!.Equals("stop"))
+                break;
+    });
     listener.Stop();
 }
 catch (Exception ex)
@@ -35,20 +53,4 @@ catch (Exception ex)
 finally
 {
     Console.WriteLine("Работа сервера завершена");
-}
-
-return;
-
-void ServerThread()
-{
-    while (listener.IsListening)
-    {
-        var context = listener.GetContext();
-        var response = context.Response;
-        const string filePath = "../../../index.html";
-        var buffer = File.ReadAllBytes(filePath);
-        using var output = response.OutputStream;
-        output.Write(buffer);
-        output.Flush();
-    }
 }

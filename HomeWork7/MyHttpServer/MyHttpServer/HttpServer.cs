@@ -29,7 +29,6 @@ public class HttpServer
     {
         try
         {
-            
             Listener.Prefixes.Add(_prefix);
             Listener.Start();
             Console.WriteLine("Server started");

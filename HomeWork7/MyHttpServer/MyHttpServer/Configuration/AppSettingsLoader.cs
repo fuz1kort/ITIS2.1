@@ -20,6 +20,7 @@ public class AppSettingsLoader
         Path = path;
         Configuration = config;
     }
+    
     public void Init()
     {
         try

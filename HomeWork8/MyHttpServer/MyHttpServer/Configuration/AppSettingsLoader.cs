@@ -37,7 +37,7 @@ public class AppSettingsLoader
         }
 
         if (!File.Exists(Path))
-            throw new ArgumentException("appsetting.json не найден");
+            throw new ArgumentException("appsettings.json не найден");
     }
     
     public static AppSettingsLoader? Instance()

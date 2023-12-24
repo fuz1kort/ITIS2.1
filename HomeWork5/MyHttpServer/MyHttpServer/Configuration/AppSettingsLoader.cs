@@ -8,7 +8,7 @@ public class AppSettingsLoader
     {
         if (!File.Exists(pathConfigFile))
         { 
-            Console.WriteLine("Файл appsetting.json не был найден");
+            Console.WriteLine("Файл appsettings.json не был найден");
             throw new Exception();
         }
 

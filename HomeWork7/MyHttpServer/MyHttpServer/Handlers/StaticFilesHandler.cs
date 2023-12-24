@@ -63,8 +63,7 @@ public class StaticFilesHandler: Handler
     {
         if (Directory.Exists(path))
             return;
-
-
+        
         Directory.CreateDirectory(path);
     }
 }

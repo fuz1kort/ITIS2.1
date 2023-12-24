@@ -12,7 +12,7 @@ public class HttpServer
     
     private readonly StaticFilesHandler _staticFileHandler = new();
     
-    private Handler? _controllersHandler = new ControllersHandler();
+    private readonly Handler? _controllersHandler = new ControllersHandler();
     
     private AppSettings Config { get; set; }
 

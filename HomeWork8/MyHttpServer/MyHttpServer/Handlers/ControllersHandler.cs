@@ -24,7 +24,6 @@ public class ControllersHandler : Handler
         
             var controllerName = strParams[0];
             var methodName = strParams[1];
-            var id = strParams.Length >= 3 ? strParams[2] : null;
             var assembly = Assembly.GetExecutingAssembly();
 
             var controller = assembly.GetTypes()
@@ -39,6 +38,8 @@ public class ControllersHandler : Handler
                                      StringComparison.OrdinalIgnoreCase) &&
                                  ((HttpMethodAttribute)attr).ActionName.Equals(methodName,
                                      StringComparison.OrdinalIgnoreCase)));
+            
+            var id =  method!.Name.Equals("Delete") || method.Name.Equals("GetById") || method.Name.Equals("Update")  ? strParams[2] : null;
 
             var queryParams = method?.GetParameters()
                 .Select((p, i) =>
@@ -50,10 +51,6 @@ public class ControllersHandler : Handler
                     return Convert.ChangeType(strParams[i], p.ParameterType);
                 })
                 .ToArray();
-
-            
-            var query = request.QueryString;
-            var idFromQuery = query["id"];
             
             if (request is { HttpMethod: "POST", HasEntityBody: true } && 
                 methodName.Equals("SendToEmail", StringComparison.OrdinalIgnoreCase))
@@ -70,26 +67,26 @@ public class ControllersHandler : Handler
             }
             else if (methodName.Equals("add", StringComparison.OrdinalIgnoreCase))
             {
-                var login = query["login"];
-                var password = query["password"];
+                var login = strParams[2];
+                var password = strParams[3];
                 var resultFromMethod = method?.Invoke(Activator.CreateInstance(controller!), new object[] { login!, password! });
                 ProcessResult(resultFromMethod, response,context);   
             }
             else if (methodName.Equals("getbyid", StringComparison.OrdinalIgnoreCase))
             {
-                var resultFromMethod = method?.Invoke(Activator.CreateInstance(controller!), new object[] { idFromQuery! });
+                var resultFromMethod = method?.Invoke(Activator.CreateInstance(controller!), new object[] { id! });
                 ProcessResult(resultFromMethod, response,context);   
             }
             else if (methodName.Equals("delete", StringComparison.OrdinalIgnoreCase))
             {
-                var resultFromMethod = method?.Invoke(Activator.CreateInstance(controller!), new object[] { idFromQuery! });
+                var resultFromMethod = method?.Invoke(Activator.CreateInstance(controller!), new object[] { id! });
                 ProcessResult(resultFromMethod, response,context);   
             }
             else if (methodName.Equals("update", StringComparison.OrdinalIgnoreCase))
             {
-                var login = query["login"];
-                var password = query["password"];
-                var resultFromMethod = method?.Invoke(Activator.CreateInstance(controller!), new object[] { login!, password!, idFromQuery! });
+                var login = strParams[3];
+                var password = strParams[4];
+                var resultFromMethod = method?.Invoke(Activator.CreateInstance(controller!), new object[] { login!, password!, id! });
                 ProcessResult(resultFromMethod, response,context);   
             }
             else

@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PointGame.Paths
+﻿namespace Game.utils.Paths
 {
     public class AddUser
     {
-        public string UserName { get; set; }
-        public Color Color { get; set; }
-
-        public AddUser(string username) => UserName = username;
+        public string? UserName { get; set; }
+        public string? Color { get; set; }
     }
 }

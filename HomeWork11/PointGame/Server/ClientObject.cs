@@ -1,57 +1,64 @@
-﻿using System.Net.Sockets;
+using System.Net.Sockets;
+using System.Text.Json;
+using Game.utils.Paths;
 
-class ClientObject
+namespace Server;
+
+internal class ClientObject
 {
     protected internal string Id { get; } = Guid.NewGuid().ToString();
     protected internal StreamWriter Writer { get; }
     protected internal StreamReader Reader { get; }
     public string? UserName { get; set; }
+    public string? Color { get; set; }
 
-    readonly TcpClient client;
-    readonly ServerObject server; // объект сервера
+    private readonly TcpClient _client;
+    private readonly ServerObject _server;
 
     public ClientObject(TcpClient tcpClient, ServerObject serverObject)
     {
-        client = tcpClient;
-        server = serverObject;
-        // получаем NetworkStream для взаимодействия с сервером
-        var stream = client.GetStream();
-        // создаем StreamReader для чтения данных
+        _client = tcpClient;
+        _server = serverObject;
+
+        var stream = _client.GetStream();
+
         Reader = new StreamReader(stream);
-        // создаем StreamWriter для отправки данных
+
         Writer = new StreamWriter(stream);
     }
+
 
     public async Task ProcessAsync()
     {
         try
         {
-            // получаем имя пользователя
             UserName = await Reader.ReadLineAsync();
+            var addUserMessage = new AddUser { UserName = UserName };
+            await _server.BroadcastColoredMessageAsync(addUserMessage);
 
-            string? message = $"{UserName} вошел в чат";
-            // посылаем сообщение о входе в чат всем подключенным пользователям
-            await server.BroadcastMessageAsync(message);
+            var message = $"{UserName} ����� � ���";
             Console.WriteLine(message);
-            // в бесконечном цикле получаем сообщения от клиента
+
+            await _server.SendListAsync();
+            await _server.BroadcastPointsFieldMessageAsync();
+
             while (true)
             {
-                await Task.Delay(2000);
+                await Task.Delay(10);
 
                 try
                 {
                     message = await Reader.ReadLineAsync();
-                    if (message == null) continue;
-                    message = $"{UserName}: {message}";
-                    Console.WriteLine(message);
-                    await server.BroadcastMessageAsync(message);
+                    var point = JsonSerializer.Deserialize<SendPoint>(message!);
+                    await _server.AddPoint(point!);
                 }
-                catch (Exception)
+                catch
                 {
-                    message = $"{UserName} покинул чат";
+                    message = $"{UserName} ������� ����";
                     Console.WriteLine(message);
-                    server.RemoveConnection(Id);
-                    await server.BroadcastMessageAsync(message);
+                    _server.RemoveConnection(Id);
+                    await _server.SendListAsync();
+                    await _server.BroadcastMessageAsync(message, Id);
                     break;
                 }
             }
@@ -62,15 +69,14 @@ class ClientObject
         }
         finally
         {
-            // в случае выхода из цикла закрываем ресурсы
-            server.RemoveConnection(Id);
+            _server.RemoveConnection(Id);
         }
     }
-    // закрытие подключения
+
     protected internal void Close()
     {
         Writer.Close();
         Reader.Close();
-        client.Close();
+        _client.Close();
     }
 }

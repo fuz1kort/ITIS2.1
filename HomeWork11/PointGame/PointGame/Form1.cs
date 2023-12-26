@@ -1,130 +1,150 @@
-using PointGame.Paths;
 using System.Net.Sockets;
 using System.Text.Json;
+using Game.utils.Paths;
 
-namespace PointGame
+namespace PointGame;
+
+public partial class Form1 : Form
 {
-    public partial class Form1 : Form
+    private TcpClient _client = null!;
+    private StreamReader _reader = null!;
+    private StreamWriter _writer = null!;
+    private Button[,] _buttons = null!;
+    private const int GridSize = 15;
+
+    public Form1()
     {
-        private TcpClient _client = null!;
-        private StreamReader _reader = null!;
-        private StreamWriter _writer = null!;
+        InitializeComponent();
 
-        public Form1()
-        { 
-            InitializeComponent();
-            listOfUsers.Visible = false;
-            testLabel.Visible = false;
-            color.Visible = false;
-        }
+        listOfUsers.Visible = false;
+        name.Visible = false;
+        color.Visible = false;
+    }
 
-        private void Form1_Load(object sender, EventArgs e)
+    private void btn_signIn_Click(object sender, EventArgs e)
+    {
+        const string host = "127.0.0.1";
+        const int port = 8888;
+        var userName = enterName.Text;
+
+        try
         {
+            _client = new TcpClient();
+            _client.Connect(host, port);
 
+            _reader = new StreamReader(_client.GetStream());
+            _writer = new StreamWriter(_client.GetStream()) { AutoFlush = true };
+
+            Task.Run(ReceiveMessageAsync);
+
+            EnterUser(userName);
+
+            name.Text = userName;
+            label1.Visible = false;
+            enterName.Visible = false;
+            btn_signIn.Visible = false;
+            listOfUsers.Visible = true;
+            name.Visible = true;
         }
-
-        private async void btn_signIn_Click(object sender, EventArgs e)
+        catch (Exception ex)
         {
-            const string host = "127.0.0.1";
-            const int port = 8888;
-            var userName = enterName.Text;
+            MessageBox.Show($@"Ошибка подключения: {ex.Message}");
+        }
+    }
 
+    private async Task ReceiveMessageAsync()
+    {
+        while (true)
+        {
             try
             {
-                _client = new TcpClient();
-                await _client.ConnectAsync(host, port);
+                var message = await _reader.ReadLineAsync();
+                if (string.IsNullOrEmpty(message)) continue;
 
-                _reader = new StreamReader(_client.GetStream());
-                _writer = new StreamWriter(_client.GetStream()) { AutoFlush = true };
+                Invoke((MethodInvoker)delegate { Print(message); });
+            }
+            catch (IOException)
+            {
+                MessageBox.Show(@"Сервер отключил клиента.");
+                break;
+            }
+            catch (Exception)
+            {
+                // ignored
+            }
+        }
+    }
 
-                // запускаем новый поток для получения данных
-                Task.Run(() => ReceiveMessageAsync(_reader));
+    private void Print(string message)
+    {
+        var messageSplit = message.Split();
+        var messageType = messageSplit[0];
+        var messageJson = messageSplit[1];
 
-                // отправляем имя пользователя
-                await EnterUserAsync(_writer, userName);
+        switch (messageType)
+        {
+            case "SendList":
+            {
+                var users = JsonSerializer.Deserialize<List<string>>(messageJson)
+                            ?? throw new ArgumentNullException(nameof(messageJson));
 
-                // обновляем интерфейс
-                testLabel.Text = userName;
-                label1.Visible = false;
-                enterName.Visible = false;
-                btn_signIn.Visible = false;
-                listOfUsers.Visible = true;
-                testLabel.Visible = true;
+                listOfUsers.Items.Clear();
+                foreach (var user in users)
+                    listOfUsers.Items.Add(user);
+                break;
+            }
+            case "AddUser":
+            {
+                var addUser = JsonSerializer.Deserialize<AddUser>(messageJson)
+                              ?? throw new ArgumentNullException(nameof(messageJson));
+                label1.Text = addUser.UserName;
+                color.BackColor = ColorTranslator.FromHtml(addUser.Color!);
                 color.Visible = true;
-
-                var rand = new Random();
-                var user = new AddUser(enterName.Text);
-
-                var jsoncolor = JsonSerializer.Serialize(user);
+                InitializeGrid();
+                break;
             }
-            catch (Exception ex)
+            case "SendPoint":
             {
-                MessageBox.Show($@"Ошибка подключения: {ex.Message}");
+                var point = JsonSerializer.Deserialize<SendPoint>(messageJson)
+                            ?? throw new ArgumentNullException(nameof(messageJson));
+                _buttons[point.Point.X, point.Point.Y].BackColor = Color.FromArgb(point.A, point.R, point.G, point.B);
+                break;
             }
         }
+    }
 
-        private async Task ReceiveMessageAsync(StreamReader reader)
+    private void EnterUser(string userName)
+    {
+        _writer.WriteLine(userName);
+        _writer.Flush();
+    }
+
+    private void InitializeGrid()
+    {
+        _buttons = new Button[GridSize, GridSize];
+        for (var i = 0; i < GridSize; i++)
         {
-            while (true)
+            for (var j = 0; j < GridSize; j++)
             {
-                try
-                {
-                    // считываем ответ в виде строки
-                    var message = await reader.ReadLineAsync();
-                    if (string.IsNullOrEmpty(message)) continue;
-
-                    // обновляем интерфейс с использованием Invoke, так как это происходит в отдельном потоке
-                    Invoke((MethodInvoker)delegate
-                    {
-                        Print(message);
-                    });
-                }
-                catch (IOException)
-                {
-                    // Исключение возникает, если считывание из закрытого потока
-                    // может произойти, если сервер отключил клиента
-                    MessageBox.Show(@"Сервер отключил клиента.");
-                    break;
-                }
-                catch (Exception)
-                {
-                    // Любые другие исключения, которые могут возникнуть при считывании
-                }
+                _buttons[i, j] = new Button();
+                _buttons[i, j].SetBounds(20 * i, 20 * j, 20, 20);
+                _buttons[i, j].Click += Button_Click!;
+                _buttons[i, j].Tag = new Point(i, j);
+                Controls.Add(_buttons[i, j]);
             }
         }
+    }
 
-        // чтобы полученное сообщение не накладывалось на ввод нового сообщения
-        private void Print(string message)
-        {
-            var users = JsonSerializer.Deserialize<List<string>>(message) 
-            ?? throw new ArgumentNullException(nameof(message));
-
-            listOfUsers.Items.Clear();
-            foreach (var user in users)
-                listOfUsers.Items.Add(user);
-            
-        }
-
-        private static async Task EnterUserAsync(StreamWriter writer, string userName)
-        {
-            // сначала отправляем имя
-            await writer.WriteLineAsync(userName);
-            await writer.FlushAsync();
-            //Console.WriteLine("Для отправки сообщений введите сообщение и нажмите Enter");
-
-            //while (true)
-            //{
-            //    string? message = Console.ReadLine();
-            //    await writer.WriteLineAsync(message);
-            //    await writer.FlushAsync();
-            //}
-        }
-
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            _reader.Close();
-            _writer.Close();
-            _client.Close();
-        }
+    private void Button_Click(object sender, EventArgs e)
+    {
+        var button = sender as Button;
+        var position = (Point)button!.Tag;
+        if (button.BackColor.Equals(color.BackColor)) return;
+        button.BackColor = color.BackColor;
+        var sendPoint = new SendPoint(position, color.BackColor.A, color.BackColor.R, color.BackColor.G,
+            color.BackColor.B);
+        var json = JsonSerializer.Serialize(sendPoint);
+        _writer.WriteLine(json);
+        _writer.Flush();
     }
 }

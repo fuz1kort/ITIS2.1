@@ -1,33 +1,40 @@
-п»їusing System.Net.Sockets;
+using System.Drawing;
 using System.Net;
+using System.Net.Sockets;
+using System.Text;
 using System.Text.Json;
+using Game.utils.Paths;
 
-class ServerObject
+namespace Server;
+
+internal class ServerObject
 {
-    readonly TcpListener tcpListener = new(IPAddress.Any, 8888); // СЃРµСЂРІРµСЂ РґР»СЏ РїСЂРѕСЃР»СѓС€РёРІР°РЅРёСЏ
-    readonly List<ClientObject> clients = new(); // РІСЃРµ РїРѕРґРєР»СЋС‡РµРЅРёСЏ
+    private readonly TcpListener _tcpListener = new(IPAddress.Any, 8888);
+    private readonly List<ClientObject> _clients = new();
+    private readonly List<SendPoint> _pointsField = new();
+
     protected internal void RemoveConnection(string id)
     {
-        // РїРѕР»СѓС‡Р°РµРј РїРѕ id Р·Р°РєСЂС‹С‚РѕРµ РїРѕРґРєР»СЋС‡РµРЅРёРµ
-        ClientObject? client = clients.FirstOrDefault(c => c.Id.Equals(id));
-        // Рё СѓРґР°Р»СЏРµРј РµРіРѕ РёР· СЃРїРёСЃРєР° РїРѕРґРєР»СЋС‡РµРЅРёР№
-        if (client != null) clients.Remove(client);
+        var client = _clients.FirstOrDefault(c => c.Id.Equals(id));
+
+        if (client != null)
+            _clients.Remove(client);
         client?.Close();
     }
-    // РїСЂРѕСЃР»СѓС€РёРІР°РЅРёРµ РІС…РѕРґСЏС‰РёС… РїРѕРґРєР»СЋС‡РµРЅРёР№
-    protected internal async Task ListenAsync()
+
+    protected internal void Listen()
     {
         try
         {
-            tcpListener.Start();
-            Console.WriteLine("РЎРµСЂРІРµСЂ Р·Р°РїСѓС‰РµРЅ. РћР¶РёРґР°РЅРёРµ РїРѕРґРєР»СЋС‡РµРЅРёР№...");
+            _tcpListener.Start();
+            Console.WriteLine("Сервер запущен. Ожидание подключений...");
 
             while (true)
             {
-                TcpClient tcpClient = await tcpListener.AcceptTcpClientAsync();
+                var tcpClient = _tcpListener.AcceptTcpClient();
 
-                ClientObject clientObject = new(tcpClient, this);
-                clients.Add(clientObject);
+                var clientObject = new ClientObject(tcpClient, this);
+                _clients.Add(clientObject);
                 Task.Run(clientObject.ProcessAsync);
             }
         }
@@ -41,24 +48,115 @@ class ServerObject
         }
     }
 
-
-    // С‚СЂР°РЅСЃР»СЏС†РёСЏ СЃРѕРѕР±С‰РµРЅРёСЏ РїРѕРґРєР»СЋС‡РµРЅРЅС‹Рј РєР»РёРµРЅС‚Р°Рј
-    protected internal async Task BroadcastMessageAsync(string message)
+    private string GenerateRandomColor()
     {
-        var usersToJson = JsonSerializer.Serialize(clients.Select(x => x.UserName).ToList());
-        foreach (var client in clients)
+        var random = new Random();
+        var color = Color.FromArgb(random.Next(256), random.Next(256), random.Next(256));
+        var hexColor = ColorTranslator.ToHtml(color);
+        while (_clients.Select(i => i.Color).Contains(hexColor))
+            color = Color.FromArgb(random.Next(256), random.Next(256), random.Next(256));
+        return ColorTranslator.ToHtml(color);
+    }
+
+    protected internal async Task SendListAsync()
+    {
+        var sb = new StringBuilder();
+        sb.Append("SendList ");
+        sb.Append(JsonSerializer.Serialize(_clients.Select(x => x.UserName).ToList()));
+
+        foreach (var client in _clients)
         {
-            await client.Writer.WriteLineAsync(usersToJson); //РїРµСЂРµРґР°С‡Р° РґР°РЅРЅС‹С…
+            await client.Writer.WriteLineAsync(sb);
             await client.Writer.FlushAsync();
         }
     }
-    // РѕС‚РєР»СЋС‡РµРЅРёРµ РІСЃРµС… РєР»РёРµРЅС‚РѕРІ
+
+    protected internal async Task BroadcastColoredMessageAsync(AddUser addUser)
+    {
+        var color = GenerateRandomColor();
+        addUser.Color = color;
+        _clients.Last().Color = color;
+
+        var sb = new StringBuilder();
+        sb.Append("AddUser ");
+        var message = JsonSerializer.Serialize(addUser);
+        sb.Append(message);
+        {
+            try
+            {
+                await _clients.Last().Writer.WriteLineAsync(sb);
+                await _clients.Last().Writer.FlushAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Ошибка при отправке сообщения клиенту: " + ex.Message);
+            }
+        }
+    }
+
+    protected internal async Task BroadcastPointsFieldMessageAsync()
+    {
+        foreach (var point in _pointsField)
+        {
+            var sb = new StringBuilder();
+            sb.Append("SendPoint ");
+            {
+                try
+                {
+                    var message = JsonSerializer.Serialize(point);
+                    sb.Append(message);
+                    await _clients.Last().Writer.WriteLineAsync(sb);
+                    await _clients.Last().Writer.FlushAsync();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Ошибка при отправке точки клиенту: " + ex.Message);
+                }
+            }
+        }
+    }
+
+    protected internal async Task BroadcastPointMessageAsync(SendPoint point)
+    {
+        var sb = new StringBuilder();
+        sb.Append("SendPoint ");
+        {
+            try
+            {
+                sb.Append(JsonSerializer.Serialize(point));
+                foreach (var client in _clients)
+                {
+                    await client.Writer.WriteLineAsync(sb);
+                    await client.Writer.FlushAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Ошибка при отправке точки клиенту: " + ex.Message);
+            }
+        }
+    }
+
     protected internal void Disconnect()
     {
-        foreach (var client in clients)
+        foreach (var client in _clients)
+            client.Close();
+        _tcpListener.Stop();
+    }
+
+    protected internal async Task BroadcastMessageAsync(string message, string id)
+    {
+        var usersToJson = JsonSerializer.Serialize(_clients.Select(x => x.UserName).ToList());
+        foreach (var client in _clients)
         {
-            client.Close(); //РѕС‚РєР»СЋС‡РµРЅРёРµ РєР»РёРµРЅС‚Р°
+            await client.Writer.WriteLineAsync(usersToJson); //передача данных
+            await client.Writer.FlushAsync();
         }
-        tcpListener.Stop(); //РѕСЃС‚Р°РЅРѕРІРєР° СЃРµСЂРІРµСЂР°
+    }
+
+    protected internal async Task AddPoint(SendPoint point)
+    {
+        _pointsField.Add(point);
+        await BroadcastPointMessageAsync(point);
     }
 }

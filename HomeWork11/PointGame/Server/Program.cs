@@ -1,2 +1,4 @@
-﻿ServerObject server = new();// создаем сервер
-await server.ListenAsync(); // запускаем сервер
+﻿using Server;
+
+var server = new ServerObject();
+server.Listen();

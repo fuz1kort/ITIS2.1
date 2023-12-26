@@ -62,7 +62,7 @@ internal class ServerObject
     {
         var sb = new StringBuilder();
         sb.Append("SendList ");
-        sb.Append(JsonSerializer.Serialize(_clients.Select(x => x.UserName).ToList()));
+        sb.Append(JsonSerializer.Serialize(_clients.Select(x => new AddUser(x.UserName!, x.Color!)).ToList()));
 
         foreach (var client in _clients)
         {

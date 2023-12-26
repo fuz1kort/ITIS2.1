@@ -33,7 +33,7 @@ internal class ClientObject
         try
         {
             UserName = await Reader.ReadLineAsync();
-            var addUserMessage = new AddUser { UserName = UserName };
+            var addUserMessage = new AddUser { UserName = UserName, Color = ""};
             await _server.BroadcastColoredMessageAsync(addUserMessage);
 
             var message = $"{UserName} вошел в чат";

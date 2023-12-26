@@ -31,7 +31,7 @@ partial class Form1
         btn_signIn = new Button();
         label1 = new Label();
         enterName = new TextBox();
-        listOfUsers = new ListBox();
+        listOfUsers = new ListView();
         name = new Label();
         color = new Label();
         SuspendLayout();
@@ -66,8 +66,7 @@ partial class Form1
         // 
         // listOfUsers
         // 
-        listOfUsers.FormattingEnabled = true;
-        listOfUsers.ItemHeight = 15;
+        listOfUsers.View = View.List;
         listOfUsers.Location = new Point(545, 60);
         listOfUsers.Margin = new Padding(3, 2, 3, 2);
         listOfUsers.Name = "listOfUsers";
@@ -114,7 +113,7 @@ partial class Form1
     private Button btn_signIn;
     private Label label1;
     private TextBox enterName;
-    private ListBox listOfUsers;
+    private ListView listOfUsers;
     private Label name;
     private Label color;
 }

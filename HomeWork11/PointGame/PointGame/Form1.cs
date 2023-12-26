@@ -85,12 +85,14 @@ public partial class Form1 : Form
         {
             case "SendList":
             {
-                var users = JsonSerializer.Deserialize<List<string>>(messageJson)
+                var users = JsonSerializer.Deserialize<List<AddUser>>(messageJson)
                             ?? throw new ArgumentNullException(nameof(messageJson));
-
                 listOfUsers.Items.Clear();
                 foreach (var user in users)
-                    listOfUsers.Items.Add(user);
+                {
+                    listOfUsers.Items.Add(user.UserName);
+                    listOfUsers.Items[^1].BackColor = ColorTranslator.FromHtml(user.Color!);
+                }
                 break;
             }
             case "AddUser":
@@ -107,7 +109,7 @@ public partial class Form1 : Form
             {
                 var point = JsonSerializer.Deserialize<SendPoint>(messageJson)
                             ?? throw new ArgumentNullException(nameof(messageJson));
-                _buttons[point.Point.X, point.Point.Y].BackColor = Color.FromArgb(point.A, point.R, point.G, point.B);
+                _buttons[point.Point.X, point.Point.Y].BackColor = ColorTranslator.FromHtml(point.Color!);
                 break;
             }
         }
@@ -141,8 +143,7 @@ public partial class Form1 : Form
         var position = (Point)button!.Tag;
         if (button.BackColor.Equals(color.BackColor)) return;
         button.BackColor = color.BackColor;
-        var sendPoint = new SendPoint(position, color.BackColor.A, color.BackColor.R, color.BackColor.G,
-            color.BackColor.B);
+        var sendPoint = new SendPoint(position, ColorTranslator.ToHtml(color.BackColor));
         var json = JsonSerializer.Serialize(sendPoint);
         _writer.WriteLine(json);
         _writer.Flush();
